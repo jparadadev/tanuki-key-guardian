@@ -16,9 +16,9 @@ class BackofficeDevicesResponse(Response):
         self._meta = metadata
 
     def to_primitives(self) -> Any:
-        json_users = [user.to_primitives() for user in self._devices]
+        json_devices = [device.to_primitives() for device in self._devices]
         response = {
-            'data': json_users,
+            'data': json_devices,
         }
         if self._meta is not None:
             response['metadata'] = self._meta.to_dict()
