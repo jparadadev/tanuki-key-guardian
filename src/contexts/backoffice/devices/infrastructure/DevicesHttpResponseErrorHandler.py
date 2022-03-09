@@ -1,11 +1,11 @@
 from http import HTTPStatus
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from starlette.responses import JSONResponse
 
-from src.contexts.backoffice.devices.domain.errors.DeviceAlreadyExistsError import DeviceAlreadyExistsError
-from src.contexts.backoffice.devices.domain.errors.DeviceInvalidValueError import DeviceInvalidValueError
-from src.contexts.backoffice.devices.domain.errors.DeviceNotFoundError import DeviceNotFoundError
+from src.contexts.backoffice.devices.domain.create_one.DeviceAlreadyExistsError import DeviceAlreadyExistsError
+from src.contexts.backoffice.devices.domain.create_one.DeviceInvalidValueError import DeviceInvalidValueError
+from src.contexts.backoffice.devices.domain.find_one.DeviceNotFoundError import DeviceNotFoundError
 from src.contexts.shared.domain.errors.DomainError import DomainError
 
 

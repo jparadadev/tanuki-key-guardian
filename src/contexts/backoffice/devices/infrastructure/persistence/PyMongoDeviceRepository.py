@@ -4,7 +4,7 @@ from pymongo import MongoClient, ASCENDING
 from pymongo.errors import DuplicateKeyError
 
 from src.contexts.backoffice.devices.domain.entities.Device import Device
-from src.contexts.backoffice.devices.domain.errors.DeviceAlreadyExistsError import DeviceAlreadyExistsError
+from src.contexts.backoffice.devices.domain.create_one.DeviceAlreadyExistsError import DeviceAlreadyExistsError
 from src.contexts.backoffice.devices.domain.repositories.DeviceRepository import DeviceRepository
 from src.contexts.shared.Infrastructure.persistence.mongo.PyMongoRepository import PyMongoRepository
 from src.contexts.shared.domain.CriteriaQueryMetadata import CriteriaQueryMetadata
