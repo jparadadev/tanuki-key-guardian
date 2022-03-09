@@ -16,5 +16,5 @@ class EnvVar(Enum):
     # ---------------------- SHARED -------------------------
     # -------------------------------------------------------
 
-    SHARED_DEVICE_MONGO_HOST = 'shared.device.mongo.host'
-    SHARED_DEVICE_MONGO_PORT = 'shared.device.mongo.port'
+    SHARED_CLIENT_MONGO_HOST = 'shared.client.mongo.host'
+    SHARED_CLIENT_MONGO_PORT = 'shared.client.mongo.port'
