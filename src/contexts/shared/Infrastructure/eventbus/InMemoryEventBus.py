@@ -15,7 +15,7 @@ class InMemoryEventBus(BaseObject, EventBus):
                 if event not in event_subscriber_mapping:
                     event_subscriber_mapping[event] = []
                 event_subscriber_mapping[event].append(subscriber)
-        self.__subscriptions = event_subscriber_mapping
+        self._subscriptions = event_subscriber_mapping
 
     def start(self):
         pass
@@ -23,9 +23,9 @@ class InMemoryEventBus(BaseObject, EventBus):
     async def publish(self, events: List[DomainEvent]):
         for event in events:
             event_type = event.get_event_type_name()
-            if event_type not in self.__subscriptions:
+            if event_type not in self._subscriptions:
                 continue
-            subscribers = self.__subscriptions[event_type]
+            subscribers = self._subscriptions[event_type]
             for subscriber in subscribers:
                 await subscriber.on(event)  # TODO: add gather or future
 
@@ -36,6 +36,6 @@ class InMemoryEventBus(BaseObject, EventBus):
     def add_subscriber(self, subscriber: EventSubscriber):
         event_types = subscriber.subscribed_to()
         for event_type in event_types:
-            if event_type not in self.__subscriptions:
-                self.__subscriptions[event_type] = []
-            self.__subscriptions[event_type].append(subscriber)
+            if event_type not in self._subscriptions:
+                self._subscriptions[event_type] = []
+            self._subscriptions[event_type].append(subscriber)

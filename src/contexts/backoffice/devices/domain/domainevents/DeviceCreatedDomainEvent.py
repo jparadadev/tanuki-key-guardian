@@ -7,7 +7,7 @@ from src.contexts.shared.domain.valueobj.AggregateRoot import AggregateRoot
 
 class DeviceCreatedDomainEvent(DomainEvent):
 
-    EVENT_TYPE = 'device.created'
+    EVENT_TYPE = 'devices.created'
 
     def __init__(
             self,

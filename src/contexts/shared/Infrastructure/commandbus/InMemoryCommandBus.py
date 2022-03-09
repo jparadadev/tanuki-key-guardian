@@ -13,14 +13,14 @@ class InMemoryCommandBus(BaseObject, CommandBus):
         handler_mapping = {}
         for handler in handlers:
             handler_mapping[handler.subscribed_to()] = handler
-        self.__handler_mapping: Dict[str, CommandHandler] = handler_mapping
+        self._handler_mapping: Dict[str, CommandHandler] = handler_mapping
 
-    def __search(self, command_name: str):
-        if command_name not in self.__handler_mapping:
+    def _search(self, command_name: str):
+        if command_name not in self._handler_mapping:
             raise CommandNotRegisteredError()
-        return self.__handler_mapping[command_name]
+        return self._handler_mapping[command_name]
 
     async def dispatch(self, command: Command) -> Any:
         query_type: str = command.get_command_type_name()
-        handler = self.__search(query_type)
+        handler = self._search(query_type)
         return await handler.handle(command)

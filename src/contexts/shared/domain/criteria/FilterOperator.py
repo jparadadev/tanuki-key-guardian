@@ -9,10 +9,10 @@ class FilterOperatorValues(Enum):
 
 class FilterOperator:
 
-    __allowed_values = [e.value for e in FilterOperatorValues]
+    _allowed_values = [e.value for e in FilterOperatorValues]
 
     def __init__(self, value: str):
-        if value not in self.__allowed_values:
+        if value not in self._allowed_values:
             raise ValueObjectValidationError('Filter Operator must be one of {} but {} found.'
-                                             .format(self.__allowed_values, value))
+                                             .format(self._allowed_values, value))
         self.value = value
