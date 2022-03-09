@@ -1,6 +1,6 @@
 import argparse
 
-from src.apps.backoffice.boot import boot as boot_backoffice
+from src.apps.backoffice.backend.boot import boot as boot_backoffice
 
 
 service_mapping = {

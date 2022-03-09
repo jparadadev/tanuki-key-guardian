@@ -1,6 +1,6 @@
 import uvicorn
 
-from src.apps.backoffice.BackofficeApp import BackofficeApp
+from src.apps.backoffice.backend.BackofficeApp import BackofficeApp
 from src.contexts.shared.Infrastructure.environment.EnvManager import EnvManager
 from src.contexts.shared.Infrastructure.environment.EnvVar import EnvVar
 

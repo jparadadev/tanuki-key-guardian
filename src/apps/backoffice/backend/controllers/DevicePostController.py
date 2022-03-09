@@ -4,7 +4,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from http import HTTPStatus
 
-from src.apps.backoffice.controllers.BackofficeController import BackofficeController
+from src.apps.backoffice.backend.controllers.BackofficeController import BackofficeController
 from src.contexts.backoffice.devices.application.create_one.CreateDeviceCommand import CreateDeviceCommand
 from src.contexts.backoffice.devices.infrastructure.DevicesHttpResponseErrorHandler import JsonResponseErrorHandler
 from src.contexts.shared.domain.CommandBus import CommandBus

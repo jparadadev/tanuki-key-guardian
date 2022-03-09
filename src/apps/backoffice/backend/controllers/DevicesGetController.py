@@ -2,7 +2,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from http import HTTPStatus
 
-from src.apps.backoffice.controllers.BackofficeController import BackofficeController
+from src.apps.backoffice.backend.controllers.BackofficeController import BackofficeController
 
 from src.contexts.backoffice.devices.application.findall.FindDevicesByCriteriaQuery import FindDevicesByCriteriaQuery
 from src.contexts.shared.Infrastructure.parsers.parse_dict_format_to_criteria import parse_dict_to_criteria

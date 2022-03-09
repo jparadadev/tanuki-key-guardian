@@ -3,8 +3,8 @@ import sys
 from dependency_injector.wiring import inject, Provide
 from fastapi import APIRouter
 
-from src.apps.backoffice.controllers.StatusGetController import StatusGetController
-from src.apps.backoffice.dependencies.BackofficeContainer import BackofficeContainer, backoffice_container
+from src.apps.backoffice.backend.controllers.StatusGetController import StatusGetController
+from src.apps.backoffice.backend.dependencies.BackofficeContainer import BackofficeContainer, backoffice_container
 
 
 @inject

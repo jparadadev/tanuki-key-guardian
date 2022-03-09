@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter
 
-from src.apps.backoffice.routes import register_routes
+from src.apps.backoffice.backend.routes import register_routes
 
 
 class BackofficeApp:

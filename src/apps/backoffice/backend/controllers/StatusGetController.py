@@ -2,7 +2,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from http import HTTPStatus
 
-from src.apps.backoffice.controllers.BackofficeController import BackofficeController
+from src.apps.backoffice.backend.controllers.BackofficeController import BackofficeController
 
 
 class StatusGetController(BackofficeController):

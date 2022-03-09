@@ -1,8 +1,8 @@
 from dependency_injector import containers, providers
 
-from src.apps.backoffice.controllers.StatusGetController import StatusGetController
-from src.apps.backoffice.controllers.DevicesGetController import DevicesGetController
-from src.apps.backoffice.controllers.DevicePostController import DevicePostController
+from src.apps.backoffice.backend.controllers.StatusGetController import StatusGetController
+from src.apps.backoffice.backend.controllers.DevicesGetController import DevicesGetController
+from src.apps.backoffice.backend.controllers.DevicePostController import DevicePostController
 from src.contexts.backoffice.devices.application.create_one.CreateDeviceCommandHandler import CreateDeviceCommandHandler
 from src.contexts.backoffice.devices.application.create_one.DeviceCreator import DeviceCreator
 from src.contexts.backoffice.devices.application.findall.DevicesByCriteriaFinder import DevicesByCriteriaFinder

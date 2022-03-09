@@ -3,9 +3,9 @@ import sys
 from dependency_injector.wiring import inject, Provide
 from fastapi import APIRouter
 
-from src.apps.backoffice.controllers.DevicesGetController import DevicesGetController
-from src.apps.backoffice.controllers.DevicePostController import DevicePostController
-from src.apps.backoffice.dependencies.BackofficeContainer import BackofficeContainer, backoffice_container
+from src.apps.backoffice.backend.controllers.DevicesGetController import DevicesGetController
+from src.apps.backoffice.backend.controllers.DevicePostController import DevicePostController
+from src.apps.backoffice.backend.dependencies.BackofficeContainer import BackofficeContainer, backoffice_container
 
 
 @inject
