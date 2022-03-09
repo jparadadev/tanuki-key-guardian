@@ -8,6 +8,7 @@ from starlette.responses import JSONResponse
 from src.apps.backoffice.backend.controllers.DevicesGetController import DevicesGetController
 from src.apps.backoffice.backend.controllers.DevicePostController import DevicePostController
 from src.apps.backoffice.backend.dependencies.BackofficeContainer import BackofficeContainer, backoffice_container
+from src.contexts.backoffice.devices.infrastructure.create_one.CreateDeviceCommandDto import CreateDeviceCommandDto
 
 
 @inject
@@ -17,7 +18,7 @@ def register(
         device_post_controller: DevicePostController = Provide[BackofficeContainer.device_post_controller],
 ):
     @router.post('/devices', tags=["Devices"])
-    async def run_wrapper(req: Request) -> JSONResponse:
+    async def run_wrapper(_: CreateDeviceCommandDto, req: Request) -> JSONResponse:
         return await device_post_controller.run(req)
 
     @router.get('/devices', tags=["Devices"])

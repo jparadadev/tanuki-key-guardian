@@ -22,7 +22,7 @@ class DevicePostController(BackofficeController):
 
     async def run(self, req: Request) -> JSONResponse:
         body: Dict[str, Any] = await req.json()
-        command: CreateDeviceCommand = CreateDeviceCommand(body['id'], body['name'])
+        command: CreateDeviceCommand = CreateDeviceCommand(body.get('id'), body.get('name'))
         try:
             await self._command_bus.dispatch(command)
         except DomainError as err:
