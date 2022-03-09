@@ -1,6 +1,6 @@
-from src.contexts.backoffice.device.application.findall.BackofficeDevicesResponse import BackofficeDevicesResponse
-from src.contexts.backoffice.device.application.findall.DevicesByCriteriaFinder import DevicesByCriteriaFinder
-from src.contexts.backoffice.device.application.findall.FindDevicesByCriteriaQuery import FindDevicesByCriteriaQuery
+from src.contexts.backoffice.devices.application.findall.BackofficeDevicesResponse import BackofficeDevicesResponse
+from src.contexts.backoffice.devices.application.findall.DevicesByCriteriaFinder import DevicesByCriteriaFinder
+from src.contexts.backoffice.devices.application.findall.FindDevicesByCriteriaQuery import FindDevicesByCriteriaQuery
 from src.contexts.shared.domain.QueryHandler import QueryHandler
 from src.contexts.shared.domain.criteria.Criteria import Criteria
 

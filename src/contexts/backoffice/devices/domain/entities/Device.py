@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import Dict, List, Union, Any
 
-from src.contexts.backoffice.device.domain.domainevents.DeviceCreatedDomainEvent import DeviceCreatedDomainEvent
-from src.contexts.backoffice.device.domain.entities.DeviceCreationDate import DeviceCreationDate
-from src.contexts.backoffice.device.domain.entities.DeviceId import DeviceId
-from src.contexts.backoffice.device.domain.entities.DeviceName import DeviceName
+from src.contexts.backoffice.devices.domain.domainevents.DeviceCreatedDomainEvent import DeviceCreatedDomainEvent
+from src.contexts.backoffice.devices.domain.entities.DeviceCreationDate import DeviceCreationDate
+from src.contexts.backoffice.devices.domain.entities.DeviceId import DeviceId
+from src.contexts.backoffice.devices.domain.entities.DeviceName import DeviceName
 from src.contexts.shared.domain.valueobj.AggregateRoot import AggregateRoot
 
 
