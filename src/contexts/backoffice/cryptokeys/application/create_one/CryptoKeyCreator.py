@@ -6,7 +6,7 @@ from src.contexts.backoffice.cryptokeys.domain.repositories.CryptoKeyRepository 
 from src.contexts.shared.domain.EventBus import EventBus
 
 
-class ClientCreator:
+class CryptoKeyCreator:
 
     def __init__(self, cryptokey_repository: CryptoKeyRepository, event_bus: EventBus):
         self._cryptokey_repository = cryptokey_repository

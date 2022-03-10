@@ -18,3 +18,6 @@ class EnvVar(Enum):
 
     SHARED_CLIENT_MONGO_HOST = 'shared.client.mongo.host'
     SHARED_CLIENT_MONGO_PORT = 'shared.client.mongo.port'
+
+    SHARED_CRYPTOKEY_MONGO_HOST = 'shared.cryptokey.mongo.host'
+    SHARED_CRYPTOKEY_MONGO_PORT = 'shared.cryptokey.mongo.port'
