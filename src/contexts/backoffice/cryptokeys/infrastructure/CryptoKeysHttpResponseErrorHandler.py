@@ -3,26 +3,26 @@ from typing import Any, Dict
 
 from starlette.responses import JSONResponse
 
-from src.contexts.backoffice.clients.domain.create_one.ClientAlreadyExistsError import ClientAlreadyExistsError
-from src.contexts.backoffice.clients.domain.create_one.ClientInvalidValueError import ClientInvalidValueError
-from src.contexts.backoffice.clients.domain.find_one.ClientNotFoundError import ClientNotFoundError
+from src.contexts.backoffice.cryptokeys.domain.create_one.CryptoAlreadyExistsError import CryptoKeyAlreadyExistsError
+from src.contexts.backoffice.cryptokeys.domain.create_one.CryptoInvalidValueError import CryptoKeyInvalidValueError
+from src.contexts.backoffice.cryptokeys.domain.find_one.CryptoKeyNotFoundError import CryptoKeyNotFoundError
 from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class JsonResponseErrorHandler:
 
     _ERROR_OPTIONS_MAPPING: Dict[str, Dict[str, Any]] = {
-        ClientAlreadyExistsError.ERROR_ID: {
+        CryptoKeyAlreadyExistsError.ERROR_ID: {
             'is-private': False,
             'is-critical': False,
             'status-code': HTTPStatus.CONFLICT,
         },
-        ClientInvalidValueError.ERROR_ID: {
+        CryptoKeyInvalidValueError.ERROR_ID: {
             'is-private': False,
             'is-critical': False,
             'status-code': HTTPStatus.BAD_REQUEST,
         },
-        ClientNotFoundError.ERROR_ID: {
+        CryptoKeyNotFoundError.ERROR_ID: {
             'is-private': False,
             'is-critical': False,
             'status-code': HTTPStatus.NOT_FOUND,
