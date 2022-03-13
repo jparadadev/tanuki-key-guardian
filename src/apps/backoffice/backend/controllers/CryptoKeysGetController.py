@@ -4,7 +4,8 @@ from http import HTTPStatus
 
 from src.apps.backoffice.backend.controllers.BackofficeController import BackofficeController
 
-from src.contexts.backoffice.clients.application.findall.FindClientsByCriteriaQuery import FindClientsByCriteriaQuery
+from src.contexts.backoffice.cryptokeys.application.findall.FindCryptoKeysByCriteriaQuery import \
+    FindCryptoKeysByCriteriaQuery
 from src.contexts.shared.Infrastructure.parsers.parse_dict_format_to_criteria import parse_dict_to_criteria
 from src.contexts.shared.domain.Response import Response
 from src.contexts.shared.domain.Query import Query
@@ -22,6 +23,6 @@ class CryptoKeysGetController(BackofficeController):
     async def run(self, req: Request) -> JSONResponse:
         query_params = dict(req.query_params)
         filters, order_by, limit = parse_dict_to_criteria(query_params)
-        query: Query = FindClientsByCriteriaQuery(filters, order_by, limit)
+        query: Query = FindCryptoKeysByCriteriaQuery(filters, order_by, limit)
         res: Response = await self._query_bus.ask(query)
         return JSONResponse(status_code=HTTPStatus.OK, content=res.to_primitives())

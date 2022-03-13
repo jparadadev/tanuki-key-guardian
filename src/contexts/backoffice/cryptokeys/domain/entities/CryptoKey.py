@@ -37,7 +37,7 @@ class CryptoKey(AggregateRoot):
         client = CryptoKey(
             CryptoKeyId(raw_data.get('id')),
             ClientId(raw_data.get('client-id')),
-            CryptoKeyType(raw_data.get('name')),
+            CryptoKeyType(raw_data.get('type')),
             CryptoKeyPayload(raw_data.get('payload')),
             CryptoKeyCreationDate(raw_data.get('created-at')),
         )
@@ -49,5 +49,5 @@ class CryptoKey(AggregateRoot):
             'type': self.type.value(),
             'client-id': self.client_id.value(),
             'payload': self.payload.value(),
-            'created-at': self.created_at.value(),
+            'created-at': self.created_at.str_value(),
         }

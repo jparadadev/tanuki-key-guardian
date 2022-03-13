@@ -7,3 +7,9 @@ class CryptoKeyCreationDate(ValueObject):
 
     def __init__(self, value: datetime):
         super().__init__(value)
+
+    def value(self) -> datetime:
+        return self._value
+
+    def str_value(self) -> str:
+        return self.value().isoformat()
