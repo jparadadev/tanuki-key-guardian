@@ -1,18 +1,17 @@
+from src.contexts.backoffice.clients.domain.entities.Client import Client
 from src.contexts.backoffice.clients.domain.entities.ClientId import ClientId
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKey import CryptoKey
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyType
-from src.contexts.backoffice.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
+from src.contexts.backoffice.clients.domain.entities.ClientName import ClientName
+from src.contexts.backoffice.clients.domain.repositories.ClientRepository import ClientRepository
 from src.contexts.shared.domain.EventBus import EventBus
 
 
 class ClientCreator:
 
-    def __init__(self, cryptokey_repository: CryptoKeyRepository, event_bus: EventBus):
-        self._cryptokey_repository = cryptokey_repository
+    def __init__(self, client_repository: ClientRepository, event_bus: EventBus):
+        self._client_repository = client_repository
         self._event_bus = event_bus
 
-    async def run(self, cryptokey_id: CryptoKeyId, client_id: ClientId, cryptokey_type: CryptoKeyType):
-        cryptokey: CryptoKey = CryptoKey.create(cryptokey_id, client_id, cryptokey_type)
-        await self._cryptokey_repository.create_one(cryptokey)
-        await self._event_bus.publish(cryptokey.pull_domain_events())
+    async def run(self, client_id: ClientId, client_name: ClientName):
+        client: Client = Client.create(client_id, client_name)
+        await self._client_repository.create_one(client)
+        await self._event_bus.publish(client.pull_domain_events())
