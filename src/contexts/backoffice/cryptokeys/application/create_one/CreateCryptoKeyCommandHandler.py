@@ -6,6 +6,7 @@ from src.contexts.backoffice.clients.domain.entities.ClientId import ClientId
 from src.contexts.backoffice.clients.domain.entities.ClientName import ClientName
 from src.contexts.backoffice.cryptokeys.application.create_one.CreateCryptoKeyCommand import CreateCryptoKeyCommand
 from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
+from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyPayload import CryptoKeyPayload
 from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyType
 from src.contexts.shared.domain.BaseObject import BaseObject
 from src.contexts.shared.domain.CommandHandler import CommandHandler
@@ -25,6 +26,7 @@ class CreateCryptoKeyCommandHandler(BaseObject, CommandHandler):
         cryptokey_id: CryptoKeyId = CryptoKeyId(command.id)
         client_id: ClientId = ClientId(command.id)
         cryptokey_type: CryptoKeyType = CryptoKeyType(command.cryptokey_type)
-        await self._creator.run(cryptokey_id, client_id, cryptokey_type)
+        payload: CryptoKeyPayload = CryptoKeyPayload(command.payload)
+        await self._creator.run(cryptokey_id, client_id, cryptokey_type, payload)
 
 
