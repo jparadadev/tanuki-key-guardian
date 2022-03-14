@@ -10,6 +10,3 @@ class CryptoKeyCreationDate(ValueObject):
 
     def value(self) -> datetime:
         return self._value
-
-    def str_value(self) -> str:
-        return self.value().isoformat()

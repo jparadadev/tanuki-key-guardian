@@ -10,6 +10,7 @@ from src.contexts.shared.Infrastructure.parsers.parse_dict_format_to_criteria im
 from src.contexts.shared.domain.Response import Response
 from src.contexts.shared.domain.Query import Query
 from src.contexts.shared.domain.QueryBus import QueryBus
+from fastapi.encoders import jsonable_encoder
 
 
 class CryptoKeysGetController(BackofficeController):
@@ -25,4 +26,5 @@ class CryptoKeysGetController(BackofficeController):
         filters, order_by, limit = parse_dict_to_criteria(query_params)
         query: Query = FindCryptoKeysByCriteriaQuery(filters, order_by, limit)
         res: Response = await self._query_bus.ask(query)
-        return JSONResponse(status_code=HTTPStatus.OK, content=res.to_primitives())
+        json_compatible_item_data = jsonable_encoder(res.to_primitives())
+        return JSONResponse(status_code=HTTPStatus.OK, content=json_compatible_item_data)
