@@ -5,7 +5,11 @@ from src.contexts.shared.domain.valueobj.ValueObject import ValueObject
 
 
 class CryptoKeyTypes(Enum):
+
     RSA = 'rsa'
+    DIFFIE_HELLMAN = 'diffie-hellman'
+    DES = 'des'
+    AES = 'aes'
 
     @classmethod
     def has_value(cls, value):
