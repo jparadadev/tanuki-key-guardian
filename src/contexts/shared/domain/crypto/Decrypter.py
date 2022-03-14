@@ -1,7 +1,10 @@
+from abc import abstractmethod
+
 from src.contexts.shared.domain.Interface import Interface
 
 
-class Encrypter(Interface):
+class Decrypter(Interface):
 
-    def encrypt(self, plain_data: str):
+    @abstractmethod
+    def decrypt(self, plain_data: str, key: str):
         raise NotImplementedError()
