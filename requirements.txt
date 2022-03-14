@@ -5,6 +5,7 @@ dependency-injector==4.38.0
 fastapi==0.75.0
 h11==0.13.0
 idna==3.3
+paho-mqtt==1.6.1
 pydantic==1.9.0
 pymongo==4.0.2
 six==1.16.0
