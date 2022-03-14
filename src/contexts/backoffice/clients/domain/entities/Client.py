@@ -37,5 +37,5 @@ class Client(AggregateRoot):
         return {
             'id': self.id.value(),
             'name': self.name.value(),
-            'created-at': self.created_at.str_value(),
+            'created-at': self.created_at.value(),
         }
