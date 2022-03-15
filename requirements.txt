@@ -2,7 +2,7 @@ anyio==3.5.0
 asgiref==3.5.0
 click==8.0.4
 deepcomparer==0.0.9
-deepfinder==0.2.1
+deepfinder==1.0.0
 dependency-injector==4.38.0
 fastapi==0.75.0
 h11==0.13.0
