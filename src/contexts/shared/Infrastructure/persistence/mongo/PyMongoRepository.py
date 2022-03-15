@@ -36,8 +36,11 @@ class PyMongoRepository(ABC):
 
     async def _find_by_criteria(self, criteria: Criteria) -> Tuple[Any, Any]:
         raw_query, options = parse_criteria_to_mongo_query(criteria)
-        data = list(self._collection.find(raw_query, **options))
-        count = self._collection.count_documents(raw_query, **options)
+        return await self._find_by_raw_criteria(raw_query, options)
+
+    async def _find_by_raw_criteria(self, query, options) -> Tuple[Any, Any]:
+        data = list(self._collection.find(query, **options))
+        count = self._collection.count_documents(query, **options)
         return data, count
 
     async def _create_one(self, raw_obj: Dict[str, Any]) -> Any:
