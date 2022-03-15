@@ -24,7 +24,7 @@ class CreateCryptoKeyCommandHandler(BaseObject, CommandHandler):
 
     async def handle(self, command: CreateCryptoKeyCommand) -> NoReturn:
         cryptokey_id: CryptoKeyId = CryptoKeyId(command.id)
-        client_id: ClientId = ClientId(command.id)
+        client_id: ClientId = ClientId(command.client_id)
         cryptokey_type: CryptoKeyType = CryptoKeyType(command.cryptokey_type)
         payload: CryptoKeyPayload = CryptoKeyPayload(command.payload)
         is_master: CryptoKeyIsMaster = CryptoKeyIsMaster(command.is_master)
