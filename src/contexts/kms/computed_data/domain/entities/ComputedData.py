@@ -1,8 +1,8 @@
 from typing import Any
 
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
 from src.contexts.kms.computed_data.domain.entities.ComputedDataInput import ComputedDataInput
 from src.contexts.kms.computed_data.domain.entities.ComputedDataOutput import ComputedDataOutput
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
 from src.contexts.shared.domain.valueobj.AggregateRoot import AggregateRoot
 
 

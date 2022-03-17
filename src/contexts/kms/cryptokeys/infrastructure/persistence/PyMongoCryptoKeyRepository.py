@@ -1,17 +1,18 @@
-from typing import List, Tuple, Optional
+from typing import List, NoReturn, Tuple, Optional
 
 from pymongo import MongoClient, ASCENDING
+from pymongo.errors import DuplicateKeyError
 
-from src.contexts.ca.cryptokeys.domain.entities.CryptoKey import CryptoKey
-from src.contexts.ca.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
+from src.contexts.backoffice.cryptokeys.domain.create_one.CryptoAlreadyExistsError import CryptoKeyAlreadyExistsError
+from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKey import CryptoKey
+from src.contexts.backoffice.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 from src.contexts.shared.Infrastructure.persistence.mongo.PyMongoRepository import PyMongoRepository
-from src.contexts.shared.Infrastructure.persistence.mongo.parse_criteria_to_mongo_query import \
-    parse_criteria_to_mongo_query
 from src.contexts.shared.domain.CriteriaQueryMetadata import CriteriaQueryMetadata
 from src.contexts.shared.domain.criteria.Criteria import Criteria
 
 
 class PyMongoCryptoKeyRepository(PyMongoRepository, CryptoKeyRepository):
+
     _COLLECTION_NAME = 'cryptokey'
     _DATABASE_NAME = 'tanuki-key-guardian'
 
@@ -27,11 +28,15 @@ class PyMongoCryptoKeyRepository(PyMongoRepository, CryptoKeyRepository):
     def get_collection_name(self):
         return self._COLLECTION_NAME
 
-    async def find_by_criteria_and_is_not_private(self, criteria: Criteria) -> Tuple[List[CryptoKey],
-                                                                                     Optional[CriteriaQueryMetadata]]:
-        raw_query, options = parse_criteria_to_mongo_query(criteria)
-        raw_query['is-private'] = False
-        results, count = await super()._find_by_raw_criteria(raw_query, options)
+    async def find_by_criteria(self, criteria: Criteria) -> Tuple[List[CryptoKey], Optional[CriteriaQueryMetadata]]:
+        results, count = await super()._find_by_criteria(criteria)
         entities = [CryptoKey.create_from_primitives(result) for result in results]
         metadata = CriteriaQueryMetadata(count)
         return entities, metadata
+
+    async def create_one(self, cryptokey: CryptoKey) -> NoReturn:
+        try:
+            cryptokey = await super()._create_one(cryptokey.to_primitives())
+            return cryptokey
+        except DuplicateKeyError as _:
+            raise CryptoKeyAlreadyExistsError('CryptoKey with ID <{}> already exists.'.format(cryptokey.id.value()))

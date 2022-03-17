@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from src.contexts.shared.domain.Query import Query
 from src.contexts.shared.domain.criteria.Filter import Filter
@@ -6,9 +6,9 @@ from src.contexts.shared.domain.criteria.Limit import Limit
 from src.contexts.shared.domain.criteria.OrderBy import OrderBy
 
 
-class FindCryptoKeysByCriteriaAndNotPrivateQuery(Query):
+class ComputedDataByKeyAndInputQuery(Query):
 
-    QUERY_TYPE: str = 'ca.cryptokey.find-by-criteria-and-not-private'
+    QUERY_TYPE: str = 'backoffice.cryptokey.find-by-criteria'
 
     def __init__(
             self,

@@ -3,13 +3,25 @@ from typing import Any, Dict
 
 from starlette.responses import JSONResponse
 
-from src.contexts.ca.cryptokeys.domain.find_one.CryptoKeyNotFoundError import CryptoKeyNotFoundError
+from src.contexts.backoffice.cryptokeys.domain.create_one.CryptoAlreadyExistsError import CryptoKeyAlreadyExistsError
+from src.contexts.backoffice.cryptokeys.domain.create_one.CryptoInvalidValueError import CryptoKeyInvalidValueError
+from src.contexts.backoffice.cryptokeys.domain.find_one.CryptoKeyNotFoundError import CryptoKeyNotFoundError
 from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class JsonResponseErrorHandler:
 
     _ERROR_OPTIONS_MAPPING: Dict[str, Dict[str, Any]] = {
+        CryptoKeyAlreadyExistsError.ERROR_ID: {
+            'is-private': False,
+            'is-critical': False,
+            'status-code': HTTPStatus.CONFLICT,
+        },
+        CryptoKeyInvalidValueError.ERROR_ID: {
+            'is-private': False,
+            'is-critical': False,
+            'status-code': HTTPStatus.BAD_REQUEST,
+        },
         CryptoKeyNotFoundError.ERROR_ID: {
             'is-private': False,
             'is-critical': False,

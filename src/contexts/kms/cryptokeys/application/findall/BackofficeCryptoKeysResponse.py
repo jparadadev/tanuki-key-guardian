@@ -1,6 +1,7 @@
 from typing import List, Any
 
-from src.contexts.ca.cryptokeys.domain.entities.CryptoKey import CryptoKey
+from src.contexts.backoffice.clients.domain.entities.Client import Client
+from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKey import CryptoKey
 from src.contexts.shared.domain.Metadata import Metadata
 from src.contexts.shared.domain.Response import Response
 
