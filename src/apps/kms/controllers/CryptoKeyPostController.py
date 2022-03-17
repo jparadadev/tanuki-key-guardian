@@ -4,7 +4,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from http import HTTPStatus
 
-from src.apps.keyhub.controllers.KeyhubController import KeyhubController
+from src.apps.kms.controllers.KmsController import KmsController
 from src.contexts.backoffice.cryptokeys.application.create_one.CreateCryptoKeyCommand import CreateCryptoKeyCommand
 from src.contexts.backoffice.cryptokeys.infrastructure.CryptoKeysHttpResponseErrorHandler import \
     JsonResponseErrorHandler
@@ -12,7 +12,7 @@ from src.contexts.shared.domain.CommandBus import CommandBus
 from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
-class CryptoKeyPostController(KeyhubController):
+class CryptoKeyPostController(KmsController):
 
     def __init__(
             self,

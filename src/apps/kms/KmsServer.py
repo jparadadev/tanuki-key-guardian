@@ -1,15 +1,15 @@
 import uvicorn
 
 from src.apps.backoffice.backend.BackofficeApp import BackofficeApp
-from src.apps.keyhub.KeyhubApp import KeyhubApp
+from src.apps.kms.KmsApp import KmsApp
 from src.contexts.shared.Infrastructure.environment.EnvManager import EnvManager
 from src.contexts.shared.Infrastructure.environment.EnvVar import EnvVar
 
 
-class KeyhubServer:
+class KmsServer:
 
     def __init__(self):
-        self.app = KeyhubApp()
+        self.app = KmsApp()
 
     def run(self):
         host = EnvManager.get(EnvVar.BACKOFFICE_SERVER_HOST)

@@ -1,14 +1,14 @@
 from datetime import datetime
 from typing import Dict, List, Union, Any
 
-from src.contexts.backoffice.clients.domain.entities.ClientId import ClientId
-from src.contexts.backoffice.cryptokeys.domain.create_one.CryptoKeyCreatedDomainEvent import CryptoKeyCreatedDomainEvent
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyCreationDate import CryptoKeyCreationDate
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyIsMaster import CryptoKeyIsMaster
 from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyIsPrivate import CryptoKeyIsPrivate
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyPayload import CryptoKeyPayload
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyType
+from src.contexts.kms.cryptokeys.domain.entities.ClientId import ClientId
+from src.contexts.kms.cryptokeys.domain.create_one.CryptoKeyCreatedDomainEvent import CryptoKeyCreatedDomainEvent
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyCreationDate import CryptoKeyCreationDate
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyIsMaster import CryptoKeyIsMaster
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyPayload import CryptoKeyPayload
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyType
 from src.contexts.shared.domain.valueobj.AggregateRoot import AggregateRoot
 
 
@@ -16,7 +16,7 @@ class CryptoKey(AggregateRoot):
 
     def __init__(self, cryptokey_id: CryptoKeyId, client_id: ClientId, cryptokey_type: CryptoKeyType,
                  payload: CryptoKeyPayload, created_at: CryptoKeyCreationDate, is_master: CryptoKeyIsMaster,
-                 is_private: CryptoKeyIsPrivate):
+                is_private: CryptoKeyIsPrivate):
         super().__init__()
         self.id = cryptokey_id
         self.client_id = client_id

@@ -2,10 +2,10 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from http import HTTPStatus
 
-from src.apps.keyhub.controllers.KeyhubController import KeyhubController
+from src.apps.kms.controllers.KmsController import KmsController
 
 
-class StatusGetController(KeyhubController):
+class StatusGetController(KmsController):
 
     def __init__(self):
         pass

@@ -1,12 +1,12 @@
 from typing import NoReturn
 
-from src.contexts.keyhub.cryptokeys.domain.entities.ClientId import ClientId
-from src.contexts.keyhub.cryptokeys.application.create_one.CreateCryptoKeyCommand import CreateCryptoKeyCommand
-from src.contexts.keyhub.cryptokeys.application.create_one.CryptoKeyCreator import CryptoKeyCreator
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKeyIsMaster import CryptoKeyIsMaster
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKeyPayload import CryptoKeyPayload
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyType
+from src.contexts.kms.cryptokeys.domain.entities.ClientId import ClientId
+from src.contexts.kms.cryptokeys.application.create_one.CreateCryptoKeyCommand import CreateCryptoKeyCommand
+from src.contexts.kms.cryptokeys.application.create_one.CryptoKeyCreator import CryptoKeyCreator
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyIsMaster import CryptoKeyIsMaster
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyPayload import CryptoKeyPayload
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyType
 from src.contexts.shared.domain.BaseObject import BaseObject
 from src.contexts.shared.domain.CommandHandler import CommandHandler
 

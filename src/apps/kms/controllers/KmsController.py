@@ -4,7 +4,7 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 
-class KeyhubController(ABC):
+class KmsController(ABC):
 
     @abstractmethod
     async def run(self, req: Request) -> JSONResponse:

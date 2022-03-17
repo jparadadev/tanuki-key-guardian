@@ -3,9 +3,11 @@ from typing import List, NoReturn, Tuple, Optional
 from pymongo import MongoClient, ASCENDING
 from pymongo.errors import DuplicateKeyError
 
-from src.contexts.backoffice.cryptokeys.domain.create_one.CryptoAlreadyExistsError import CryptoKeyAlreadyExistsError
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKey import CryptoKey
-from src.contexts.backoffice.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
+from src.contexts.kms.cryptokeys.domain.create_one.CryptoAlreadyExistsError import CryptoKeyAlreadyExistsError
+from src.contexts.kms.cryptokeys.domain.entities.ClientId import ClientId
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKey import CryptoKey
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyIsMaster import CryptoKeyIsMaster
+from src.contexts.kms.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 from src.contexts.shared.Infrastructure.persistence.mongo.PyMongoRepository import PyMongoRepository
 from src.contexts.shared.domain.CriteriaQueryMetadata import CriteriaQueryMetadata
 from src.contexts.shared.domain.criteria.Criteria import Criteria
@@ -40,3 +42,7 @@ class PyMongoCryptoKeyRepository(PyMongoRepository, CryptoKeyRepository):
             return cryptokey
         except DuplicateKeyError as _:
             raise CryptoKeyAlreadyExistsError('CryptoKey with ID <{}> already exists.'.format(cryptokey.id.value()))
+
+    async def find_by_client_and_is_master(self, client: ClientId, is_master: CryptoKeyIsMaster) -> \
+            Tuple[Optional[CryptoKey], Optional[CriteriaQueryMetadata]]:
+        pass

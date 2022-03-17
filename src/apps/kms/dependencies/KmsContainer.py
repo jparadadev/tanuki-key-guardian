@@ -1,13 +1,13 @@
 from dependency_injector import containers, providers
 
-from src.apps.keyhub.controllers.CryptoKeyPostController import CryptoKeyPostController
-from src.apps.keyhub.controllers.StatusGetController import StatusGetController
-from src.contexts.keyhub.cryptokeys.application.create_one.CreateCryptoKeyCommandHandler import \
+from src.apps.kms.controllers.CryptoKeyPostController import CryptoKeyPostController
+from src.apps.kms.controllers.StatusGetController import StatusGetController
+from src.contexts.kms.cryptokeys.application.create_one.CreateCryptoKeyCommandHandler import \
     CreateCryptoKeyCommandHandler
-from src.contexts.keyhub.cryptokeys.application.create_one.CryptoKeyCreator import CryptoKeyCreator
-from src.contexts.keyhub.cryptokeys.infrastructure.persistence.PyMongoCryptoKeyRepository import \
+from src.contexts.kms.cryptokeys.application.create_one.CryptoKeyCreator import CryptoKeyCreator
+from src.contexts.kms.cryptokeys.infrastructure.persistence.PyMongoCryptoKeyRepository import \
     PyMongoCryptoKeyRepository
-from src.contexts.keyhub.cryptokeys.infrastructure.persistence.config.PyMongoCryptoKeyConfigFactory import \
+from src.contexts.kms.cryptokeys.infrastructure.persistence.config.PyMongoCryptoKeyConfigFactory import \
     PyMongoCryptoKeyConfigFactory
 from src.contexts.shared.Infrastructure.commandbus.InMemoryCommandBus import InMemoryCommandBus
 from src.contexts.shared.Infrastructure.eventbus.InMemoryEventBus import InMemoryEventBus
@@ -22,7 +22,7 @@ class KeyhubContainer(containers.DeclarativeContainer):
     )
 
     db_config = providers.Singleton(PyMongoCryptoKeyConfigFactory.create)
-    db_client = providers.Singleton(PyMongoClientFactory.create_instance, 'keyhub', db_config)
+    db_client = providers.Singleton(PyMongoClientFactory.create_instance, 'kms', db_config)
 
     cryptokey_repository = providers.Singleton(PyMongoCryptoKeyRepository, db_client)
 

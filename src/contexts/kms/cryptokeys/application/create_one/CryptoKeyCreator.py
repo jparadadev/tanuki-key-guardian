@@ -1,10 +1,10 @@
-from src.contexts.keyhub.cryptokeys.domain.entities.ClientId import ClientId
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKey import CryptoKey
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKeyIsMaster import CryptoKeyIsMaster
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKeyPayload import CryptoKeyPayload
-from src.contexts.keyhub.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyType
-from src.contexts.keyhub.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
+from src.contexts.kms.cryptokeys.domain.entities.ClientId import ClientId
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKey import CryptoKey
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyIsMaster import CryptoKeyIsMaster
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyPayload import CryptoKeyPayload
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyType
+from src.contexts.kms.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 from src.contexts.shared.domain.EventBus import EventBus
 
 
