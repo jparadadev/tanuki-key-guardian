@@ -2,11 +2,13 @@ import argparse
 
 from src.apps.backoffice.backend.boot import boot as boot_backoffice
 from src.apps.ca.boot import boot as boot_ca
+from src.apps.keyhub.boot import boot as boot_keyhub
 
 
 service_mapping = {
     'backoffice': boot_backoffice,
     'ca': boot_ca,
+    'keyhub': boot_keyhub,
 }
 
 if __name__ == "__main__":
@@ -15,7 +17,7 @@ if __name__ == "__main__":
         '--service',
         type=str,
         nargs='?',
-        help='Service to run must be one of ["backoffice", "ca"]',
+        help='Service to run must be one of ["backoffice", "ca", "keyhub"]',
     )
     params = vars(parser.parse_args())
     service_name = params['service']
