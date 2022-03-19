@@ -5,6 +5,7 @@ from pymongo.errors import DuplicateKeyError
 
 from src.contexts.backoffice.cryptokeys.domain.create_one.CryptoAlreadyExistsError import CryptoKeyAlreadyExistsError
 from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKey import CryptoKey
+from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
 from src.contexts.backoffice.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 from src.contexts.shared.Infrastructure.persistence.mongo.PyMongoRepository import PyMongoRepository
 from src.contexts.shared.domain.CriteriaQueryMetadata import CriteriaQueryMetadata
@@ -33,6 +34,11 @@ class PyMongoCryptoKeyRepository(PyMongoRepository, CryptoKeyRepository):
         entities = [CryptoKey.create_from_primitives(result) for result in results]
         metadata = CriteriaQueryMetadata(count)
         return entities, metadata
+
+    async def find_by_id(self, key_id: CryptoKeyId) -> Optional[CryptoKeyId]:
+        result = await super()._find_one({'id': key_id.value()})
+        entity = CryptoKey.create_from_primitives(result)
+        return entity
 
     async def create_one(self, cryptokey: CryptoKey) -> NoReturn:
         try:

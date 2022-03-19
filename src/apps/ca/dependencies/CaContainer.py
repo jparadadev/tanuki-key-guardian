@@ -2,8 +2,8 @@ from dependency_injector import containers, providers
 
 from src.apps.ca.controllers.CryptoKeysGetController import CryptoKeysGetController
 from src.apps.ca.controllers.StatusGetController import StatusGetController
-from src.contexts.ca.cryptokeys.application.find_all_not_private.CryptoKeysByCriteriaAndNotPrivateFinder import CryptoKeysByCriteriaAndNotPrivateFinder
-from src.contexts.ca.cryptokeys.application.find_all_not_private.FindCryptoKeysByCriteriaAndNotPrivateQueryHandler import \
+from src.contexts.kms.cryptokeys.application.find_all_not_private.CryptoKeysByCriteriaAndNotPrivateFinder import CryptoKeysByCriteriaAndNotPrivateFinder
+from src.contexts.kms.cryptokeys.application.find_all_not_private.FindCryptoKeysByCriteriaAndNotPrivateQueryHandler import \
     FindCryptoKeysByCriteriaAndNotPrivateQueryHandler
 from src.contexts.ca.cryptokeys.infrastructure.persistence.PyMongoCryptoKeyRepository import \
     PyMongoCryptoKeyRepository

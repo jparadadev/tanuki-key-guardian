@@ -1,11 +1,13 @@
 from src.contexts.backoffice.cryptokeys.application.findall.BackofficeCryptoKeysResponse import \
     BackofficeCryptoKeysResponse
+from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
 from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInputFinder import \
     ComputedDataByKeyAndInputFinder
 from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInputQuery import \
     ComputedDataByKeyAndInputQuery
+from src.contexts.kms.computed_data.application.find_one.KmsComputedDataResponse import KmsComputedDataResponse
+from src.contexts.kms.computed_data.domain.entities.ComputedDataInput import ComputedDataInput
 from src.contexts.shared.domain.QueryHandler import QueryHandler
-from src.contexts.shared.domain.criteria.Criteria import Criteria
 
 
 class ComputedDataByKeyAndInputQueryHandler(QueryHandler):
@@ -18,6 +20,7 @@ class ComputedDataByKeyAndInputQueryHandler(QueryHandler):
     def subscribed_to(self) -> str:
         return self._subscription
 
-    async def handle(self, query: ComputedDataByKeyAndInputQuery) -> BackofficeCryptoKeysResponse:
-        criteria = Criteria(query.filters, query.order_by, query.limit)
-        return await self._finder.run(criteria)
+    async def handle(self, query: ComputedDataByKeyAndInputQuery) -> KmsComputedDataResponse:
+        crypto_key_id = CryptoKeyId(query.key_id)
+        input = ComputedDataInput(query.input)
+        return await self._finder.run(crypto_key_id, input)

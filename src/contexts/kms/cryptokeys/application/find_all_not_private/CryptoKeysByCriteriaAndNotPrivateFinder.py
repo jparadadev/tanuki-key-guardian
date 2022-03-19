@@ -1,4 +1,4 @@
-from src.contexts.ca.cryptokeys.application.find_all_not_private.BackofficeCryptoKeysResponse import \
+from src.contexts.kms.cryptokeys.application.find_all_not_private.BackofficeCryptoKeysResponse import \
     BackofficeCryptoKeysResponse
 from src.contexts.ca.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 from src.contexts.shared.domain.criteria.Criteria import Criteria

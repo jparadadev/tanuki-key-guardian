@@ -1,8 +1,6 @@
-from typing import List, Any
+from typing import Any
 
-from src.contexts.backoffice.clients.domain.entities.Client import Client
-from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKey import CryptoKey
-from src.contexts.shared.domain.Metadata import Metadata
+from src.contexts.kms.computed_data.domain.entities.ComputedData import ComputedData
 from src.contexts.shared.domain.Response import Response
 
 
@@ -10,17 +8,13 @@ class KmsComputedDataResponse(Response):
 
     def __init__(
             self,
-            cryptokeys: List[CryptoKey],
-            metadata: Metadata = None,
+            computed_data: ComputedData
     ):
-        self._cryptokeys = cryptokeys
-        self._meta = metadata
+        self._computed_data = computed_data
 
     def to_primitives(self) -> Any:
-        json_cryptokeys = [cryptokey.to_primitives() for cryptokey in self._cryptokeys]
+        json_computed_data = self._computed_data.to_primitives()
         response = {
-            'data': json_cryptokeys,
+            'data': json_computed_data,
         }
-        if self._meta is not None:
-            response['metadata'] = self._meta.to_dict()
         return response

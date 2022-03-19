@@ -4,7 +4,7 @@ from http import HTTPStatus
 
 from src.apps.ca.controllers.CaController import CaController
 
-from src.contexts.ca.cryptokeys.application.find_all_not_private.FindCryptoKeysByCriteriaAndNotPrivateQuery import \
+from src.contexts.kms.cryptokeys.application.find_all_not_private.FindCryptoKeysByCriteriaAndNotPrivateQuery import \
     FindCryptoKeysByCriteriaAndNotPrivateQuery
 from src.contexts.shared.Infrastructure.parsers.parse_dict_format_to_criteria import parse_dict_to_criteria
 from src.contexts.shared.domain.Response import Response

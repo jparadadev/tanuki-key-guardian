@@ -1,24 +1,17 @@
-from typing import List, Optional
-
 from src.contexts.shared.domain.Query import Query
-from src.contexts.shared.domain.criteria.Filter import Filter
-from src.contexts.shared.domain.criteria.Limit import Limit
-from src.contexts.shared.domain.criteria.OrderBy import OrderBy
 
 
 class ComputedDataByKeyAndInputQuery(Query):
 
-    QUERY_TYPE: str = 'backoffice.cryptokey.find-by-criteria'
+    QUERY_TYPE: str = 'kms.computed-data.find-by-key-and-input'
 
     def __init__(
             self,
-            filters: List[Filter],
-            order_by: OrderBy = None,
-            limit: Limit = None,
+            key_id: str,
+            input: str,
     ):
-        self.filters = filters
-        self.order_by = order_by
-        self.limit = limit
+        self.key_id = key_id
+        self.input = input
 
     def get_query_type_name(self) -> str:
         return self.QUERY_TYPE
