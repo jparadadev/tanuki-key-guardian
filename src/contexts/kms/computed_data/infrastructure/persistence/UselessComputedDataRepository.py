@@ -12,6 +12,6 @@ class UselessComputedDataRepository(BaseObject, ComputedDataRepository):
         data = ComputedData(
             input,
             ComputedDataOutput(input.value()),
-            key.id.value(),
+            key.id,
         )
         return data

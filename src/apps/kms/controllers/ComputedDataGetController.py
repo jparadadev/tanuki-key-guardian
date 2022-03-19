@@ -27,11 +27,12 @@ class ComputedDataGetController(KmsController):
 
     async def run(self, req: Request) -> JSONResponse:
         query_params = dict(req.query_params)
-        filters, order_by, limit = parse_dict_to_criteria(query_params)
-        query: ComputedDataByKeyAndInputQuery = ComputedDataByKeyAndInputQuery(filters, order_by, limit)
+
+        query: ComputedDataByKeyAndInputQuery = ComputedDataByKeyAndInputQuery(query_params.get('key-id'),
+                                                                               query_params.get('input'))
         try:
-            await self._query_bus.ask(query)
+            content = await self._query_bus.ask(query)
         except DomainError as err:
             return self._error_handler.resolve(err)
 
-        return JSONResponse(status_code=HTTPStatus.OK)
+        return JSONResponse(status_code=HTTPStatus.OK, content=content.to_primitives())
