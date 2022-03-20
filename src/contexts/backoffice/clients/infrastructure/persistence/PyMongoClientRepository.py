@@ -5,6 +5,8 @@ from pymongo.errors import DuplicateKeyError
 
 from src.contexts.backoffice.clients.domain.entities.Client import Client
 from src.contexts.backoffice.clients.domain.create_one.ClientAlreadyExistsError import ClientAlreadyExistsError
+from src.contexts.backoffice.clients.domain.entities.ClientId import ClientId
+from src.contexts.backoffice.clients.domain.find_one.ClientNotFoundError import ClientNotFoundError
 from src.contexts.backoffice.clients.domain.repositories.ClientRepository import ClientRepository
 from src.contexts.shared.Infrastructure.persistence.mongo.PyMongoRepository import PyMongoRepository
 from src.contexts.shared.domain.CriteriaQueryMetadata import CriteriaQueryMetadata
@@ -40,3 +42,9 @@ class PyMongoClientRepository(PyMongoRepository, ClientRepository):
             return client
         except DuplicateKeyError as _:
             raise ClientAlreadyExistsError('Client with ID <{}> already exists.'.format(client.id.value()))
+
+    async def delete_one(self, client_id: ClientId) -> NoReturn:
+        try:
+            await super()._delete_one({'id': client_id.value()})
+        except Exception as _:
+            raise ClientNotFoundError('Client with ID <{}> not found.'.format(client_id.value()))

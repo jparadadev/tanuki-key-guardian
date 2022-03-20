@@ -9,9 +9,11 @@ class ComputedDataByKeyAndInputQuery(Query):
             self,
             key_id: str,
             input: str,
+            type: str,
     ):
         self.key_id = key_id
         self.input = input
+        self.type = type
 
     def get_query_type_name(self) -> str:
         return self.QUERY_TYPE

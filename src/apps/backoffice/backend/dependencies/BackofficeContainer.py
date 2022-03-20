@@ -1,5 +1,6 @@
 from dependency_injector import containers, providers
 
+from src.apps.backoffice.backend.controllers.ClientDeleteController import ClientDeleteController
 from src.apps.backoffice.backend.controllers.CryptoKeyPostController import CryptoKeyPostController
 from src.apps.backoffice.backend.controllers.CryptoKeysGetController import CryptoKeysGetController
 from src.apps.backoffice.backend.controllers.StatusGetController import StatusGetController
@@ -7,6 +8,8 @@ from src.apps.backoffice.backend.controllers.ClientsGetController import Clients
 from src.apps.backoffice.backend.controllers.ClientPostController import ClientPostController
 from src.contexts.backoffice.clients.application.create_one.CreateClientCommandHandler import CreateClientCommandHandler
 from src.contexts.backoffice.clients.application.create_one.ClientCreator import ClientCreator
+from src.contexts.backoffice.clients.application.delete_one.ClientDeleter import ClientDeleter
+from src.contexts.backoffice.clients.application.delete_one.DeleteClientCommandHandler import DeleteClientCommandHandler
 from src.contexts.backoffice.clients.application.findall.ClientsByCriteriaFinder import ClientsByCriteriaFinder
 from src.contexts.backoffice.clients.application.findall.FindClientsByCriteriaQueryHandler import \
     FindClientsByCriteriaQueryHandler
@@ -57,6 +60,12 @@ class BackofficeContainer(containers.DeclarativeContainer):
         client_creator,
     )
 
+    client_deleter = providers.Singleton(ClientDeleter, client_repository, event_bus)
+    delete_client_command_handler = providers.Singleton(
+        DeleteClientCommandHandler,
+        client_deleter,
+    )
+
     cryptokey_creator = providers.Singleton(CryptoKeyCreator, cryptokey_repository, event_bus)
     create_cryptokey_command_handler = providers.Singleton(
         CreateCryptoKeyCommandHandler,
@@ -73,11 +82,13 @@ class BackofficeContainer(containers.DeclarativeContainer):
         InMemoryCommandBus,
         create_client_command_handler,
         create_cryptokey_command_handler,
+        delete_client_command_handler,
     )
 
     status_get_controller = providers.Singleton(StatusGetController)
     clients_get_controller = providers.Singleton(ClientsGetController, query_bus)
     client_post_controller = providers.Singleton(ClientPostController, command_bus)
+    client_delete_controller = providers.Singleton(ClientDeleteController, command_bus)
     cryptokeys_get_controller = providers.Singleton(CryptoKeysGetController, query_bus)
     cryptokeys_post_controller = providers.Singleton(CryptoKeyPostController, command_bus)
 

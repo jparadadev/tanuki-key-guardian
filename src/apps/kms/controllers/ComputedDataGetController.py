@@ -29,7 +29,8 @@ class ComputedDataGetController(KmsController):
         query_params = dict(req.query_params)
 
         query: ComputedDataByKeyAndInputQuery = ComputedDataByKeyAndInputQuery(query_params.get('key-id'),
-                                                                               query_params.get('input'))
+                                                                               query_params.get('input'),
+                                                                               query_params.get('type'))
         try:
             content = await self._query_bus.ask(query)
         except DomainError as err:

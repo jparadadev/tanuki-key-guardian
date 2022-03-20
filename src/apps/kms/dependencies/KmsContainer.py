@@ -11,6 +11,8 @@ from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInp
     ComputedDataByKeyAndInputFinder
 from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInputQueryHandler import \
     ComputedDataByKeyAndInputQueryHandler
+from src.contexts.kms.computed_data.infrastructure.persistence.AllAlgorithmComputedDataRepository import \
+    AllAlgorithmComputedDataRepository
 from src.contexts.kms.computed_data.infrastructure.persistence.UselessComputedDataRepository import \
     UselessComputedDataRepository
 from src.contexts.kms.cryptokeys.application.create_one.CreateCryptoKeyCommandHandler import \
@@ -32,7 +34,7 @@ class KeyhubContainer(containers.DeclarativeContainer):
     db_client = providers.Singleton(PyMongoClientFactory.create_instance, 'kms', db_config)
 
     cryptokey_repository = providers.Singleton(PyMongoCryptoKeyRepository, db_client)
-    computed_data_repository = providers.Singleton(UselessComputedDataRepository)
+    computed_data_repository = providers.Singleton(AllAlgorithmComputedDataRepository)
 
     cryptokey_creator = providers.Singleton(CryptoKeyCreator, cryptokey_repository, event_bus)
     create_cryptokey_command_handler = providers.Singleton(
