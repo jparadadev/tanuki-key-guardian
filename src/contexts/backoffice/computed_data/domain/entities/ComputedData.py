@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict, List
 
 from src.contexts.backoffice.computed_data.domain.entities.ComputedDataInput import ComputedDataInput
 from src.contexts.backoffice.computed_data.domain.entities.ComputedDataOutput import ComputedDataOutput
@@ -24,7 +24,7 @@ class ComputedData(AggregateRoot):
         return computed_data
 
     @staticmethod
-    def create_from_primitives(raw_data: dict[str, Any]):
+    def create_from_primitives(raw_data: Dict[str, Any]):
         client = ComputedData(
             ComputedDataInput(raw_data.get('input')),
             ComputedDataOutput(raw_data.get('output')),
@@ -33,7 +33,7 @@ class ComputedData(AggregateRoot):
         )
         return client
 
-    def to_primitives(self) -> dict or list:
+    def to_primitives(self) -> Dict or List:
         return {
             'input': self.cd_input.value(),
             'output': self.cd_output.value(),
