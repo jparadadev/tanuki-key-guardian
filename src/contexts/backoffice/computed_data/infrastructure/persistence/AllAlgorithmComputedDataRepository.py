@@ -20,7 +20,7 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
                                                cd_type: ComputedDataType) -> ComputedData:
         output = ''
         if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN.value:
-            self.__ECDH(key.payload.value(), input.value())
+            output = self.__ECDH(key.payload.value(), input.value())
 
         data = ComputedData(
             input,
@@ -33,11 +33,12 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
 
 
     def __ECDH(self, private_key:str, public_key:str):
+        return private_key
         public_key = str.encode(public_key)
         private_key = str.encode(private_key)
-        str.de
+
         # ec.generate_private_key(ec.SECP384R1(), )
-        serialization.load_pem_parameters()
+        # serialization.load_pem_parameters()
         # Input para shared key IoT: ID clave privada IoT, ID clave pública plataforma
         # Returns shared key IoT
         # Input para shared key plataforma: ID clave privada platform, ID clave pública IoT
