@@ -25,7 +25,8 @@ class CryptoKeyPostController(BackofficeController):
         body: Dict[str, Any] = await req.json()
         command: CreateCryptoKeyCommand = CreateCryptoKeyCommand(body.get('id'), body.get('client-id'),
                                                                  body.get('type'), body.get('payload'),
-                                                                 body.get('is-master'), body.get('is-private'))
+                                                                 body.get('parameters'), body.get('is-master'),
+                                                                 body.get('is-private'))
         try:
             await self._command_bus.dispatch(command)
         except DomainError as err:
