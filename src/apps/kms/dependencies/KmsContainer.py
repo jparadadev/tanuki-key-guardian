@@ -7,14 +7,12 @@ from src.contexts.backoffice.cryptokeys.infrastructure.persistence.PyMongoCrypto
     PyMongoCryptoKeyRepository
 from src.contexts.backoffice.cryptokeys.infrastructure.persistence.config.PyMongoCryptoKeyConfigFactory import \
     PyMongoCryptoKeyConfigFactory
-from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInputFinder import \
+from src.contexts.backoffice.computed_data.application.find_one.ComputedDataByKeyAndInputFinder import \
     ComputedDataByKeyAndInputFinder
-from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInputQueryHandler import \
+from src.contexts.backoffice.computed_data.application.find_one.ComputedDataByKeyAndInputQueryHandler import \
     ComputedDataByKeyAndInputQueryHandler
-from src.contexts.kms.computed_data.infrastructure.persistence.AllAlgorithmComputedDataRepository import \
+from src.contexts.backoffice.computed_data.infrastructure.persistence.AllAlgorithmComputedDataRepository import \
     AllAlgorithmComputedDataRepository
-from src.contexts.kms.computed_data.infrastructure.persistence.UselessComputedDataRepository import \
-    UselessComputedDataRepository
 from src.contexts.kms.cryptokeys.application.create_one.CreateCryptoKeyCommandHandler import \
     CreateCryptoKeyCommandHandler
 from src.contexts.kms.cryptokeys.application.create_one.CryptoKeyCreator import CryptoKeyCreator
@@ -47,14 +45,14 @@ class KeyhubContainer(containers.DeclarativeContainer):
         cryptokey_repository,
         computed_data_repository,
     )
-    find_cryptokeys_by_criteria_query_handler = providers.Singleton(
+    find_computed_data_by_criteria_query_handler = providers.Singleton(
         ComputedDataByKeyAndInputQueryHandler,
         computed_data_by_key_and_input_finder,
     )
 
     query_bus = providers.Singleton(
         InMemoryQueryBus,
-        find_cryptokeys_by_criteria_query_handler,
+        find_computed_data_by_criteria_query_handler,
     )
 
     command_bus = providers.Singleton(

@@ -1,6 +1,6 @@
 from typing import Any
 
-from src.contexts.kms.computed_data.domain.entities.ComputedData import ComputedData
+from src.contexts.backoffice.computed_data.domain.entities.ComputedData import ComputedData
 from src.contexts.shared.domain.Response import Response
 
 
