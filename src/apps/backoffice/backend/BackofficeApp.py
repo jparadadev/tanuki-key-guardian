@@ -8,7 +8,7 @@ class BackofficeApp:
 
     def __init__(self):
         self._app: FastAPI = FastAPI(
-            title="Tanuki Key Guardian - Backoffice",
+            title="Tanuki Key Guardian - KMS",
             license_info={'url': 'https://www.apache.org/licenses/LICENSE-2.0.html', 'name': 'Apache 2.0'}
         )
 
