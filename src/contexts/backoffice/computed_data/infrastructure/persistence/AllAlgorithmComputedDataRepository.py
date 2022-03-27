@@ -1,12 +1,12 @@
 import sys
 
-from cryptography.hazmat.primitives import hashes, serialization, hmac
+from cryptography.hazmat.primitives import hashes, hmac
 from cryptography.hazmat.primitives._serialization import PublicFormat, Encoding
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.asymmetric import dh
-from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from cryptography.hazmat.primitives.serialization import load_pem_public_key, load_pem_parameters
 
+from src.contexts.backoffice.computed_data.domain.entities.ComputedDataMeta import ComputedDataMeta
 from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKey import CryptoKey
 from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyTypes
 from src.contexts.backoffice.computed_data.domain.entities.ComputedData import ComputedData
@@ -22,24 +22,26 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
     async def find_one_by_crypto_key_and_input(self, key: CryptoKey, input: ComputedDataInput,
                                                cd_type: ComputedDataType) -> ComputedData:
         output = input.value()
+        meta = {}
         if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN.value:
-            output = await self.ecdh_get_shared_key_platform(key.payload.value())
+            output, meta = await self.ecdh_get_shared_key_platform(key.payload.value())
 
         if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN_HMAC.value:
             parameters = key.parameters.value()
             dh_parameters = parameters['parameters']
             signature = parameters['signature']
-            output = await self.hmac_DH_GetSharedKey_Platform(dh_parameters, key.payload.value(), signature)
+            output, meta = await self.hmac_DH_GetSharedKey_Platform(dh_parameters, key.payload.value(), signature)
 
         data = ComputedData(
             input,
             ComputedDataOutput(output),
             key.id,
             cd_type,
+            ComputedDataMeta(meta),
         )
         return data
 
-    async def ecdh_get_shared_key_platform(self, public_key_IoT: str):
+    async def ecdh_get_shared_key_platform(self, public_key_IoT: str) -> (str, dict):
         # Input para shared key Platform: ID clave pública IoT
         # Returns shared key IoT
 
@@ -55,9 +57,9 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
         # Returns shared key platform
         shared_key = private_key.exchange(ec.ECDH(), loaded_public_key_IoT)
 
-        return shared_key.hex()
+        return shared_key.hex(), {'generated-public-key': str_public_key}
 
-    async def hmac_DH_GetSharedKey_Platform(self, dh_parameters: str, public_key_IoT: str, pk_signature: str):
+    async def hmac_DH_GetSharedKey_Platform(self, dh_parameters: str, public_key_IoT: str, pk_signature: str) -> (str, dict):
         # A la API le llega el id de la clave y de ahí saca el string de parámetros y de la public key del IoT
 
         # En este punto, el KMS ya tiene los dh_parameters y la clave pública en string y debe convertirlo al objeto original
@@ -92,4 +94,4 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
 
         shared_key = platform_private_key.exchange(loaded_public_key_IoT)
         # Devuelve la clave en string, el IoT debe enviar al KMS luego de nuevo esta clave para que la almacene
-        return shared_key.hex()
+        return shared_key.hex(), {'generated-public-key': str_platform_pk, 'signature': str_signature}
