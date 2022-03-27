@@ -41,6 +41,13 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
             text, nonce = tuple(input.value().split('@'))
             output, meta = await self.decrypt_AE(key.payload.value(), text, nonce)
 
+        if key.type.value() == CryptoKeyTypes.AEAD.value and cd_type.value() == ComputedDataTypes.ENCRYPT.value:
+            output, meta = await self.Encryption_AEAD(key.payload.value(), input.value())
+
+        if key.type.value() == CryptoKeyTypes.AEAD.value and cd_type.value() == ComputedDataTypes.DECRYPT.value:
+            text, nonce = tuple(input.value().split('@'))
+            output, meta = await self.Decrypt_AEAD(text, key.payload.value(), nonce)
+
         data = ComputedData(
             input,
             ComputedDataOutput(output),
@@ -49,6 +56,48 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
             ComputedDataMeta(meta),
         )
         return data
+
+    async def Encryption_AEAD(self, passphrase: str, sensitive_data: str):
+        # Key generation
+        key_gen = b"/\x84F\xc5\xddA^k\xd2.C\x19'\x1a2\x9c"  # Key derivation
+        key = PBKDF2(passphrase, key_gen)  # Contraseña basada en key derivation
+        print("AES Encryption Key: " + str(key))
+
+        # Data sensitiva para cifrar
+        print("Data enviada para cifrar: " + "\n" + str(sensitive_data))
+
+        # Encriptación usando AES GCM
+        cipher = AES.new(key, AES.MODE_GCM)  # https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html
+        ciphertext = cipher.encrypt(sensitive_data.encode('utf-8'))
+        nonce = cipher.nonce
+
+        # Mensaje transmitido
+        # ciphertext: resultado de los datos cifrados,
+        # tag: Codigo de autenticacion de mensajes MAC
+        # nonce: vector de inicializacion (solo ocurre una vez)
+
+        transmitted_message = ciphertext.hex()
+        print("\nMensaje transmitido: " + str(transmitted_message))
+        return f'{transmitted_message}@{nonce.hex()}', {'nonce': nonce.hex()}
+
+    async def Decrypt_AEAD(self, transmitted_message: str, passphrase: str, nonce: str) -> str:
+        received_kdf_salt = b"/\x84F\xc5\xddA^k\xd2.C\x19'\x1a2\x9c"
+        received_msg = transmitted_message
+        print("Mensaje recibido: " + str(received_msg))
+        received_ciphertext = received_msg
+        # Generate decryption key from passphrase and salt
+        decryption_key = PBKDF2(passphrase, received_kdf_salt)
+        print("Decryption Key: " + str(decryption_key))
+        cipher = AES.new(decryption_key, AES.MODE_GCM, bytes.fromhex(nonce))
+        try:
+            decrypted_data = cipher.decrypt(bytes.fromhex(received_ciphertext))
+            print("\nMAC validated: Data was encrypted by someone with the shared secret passphrase")
+            print("All allies have passphrase - SYMMETRIC encryption!!!")
+            print("Data descifrada: " + str(decrypted_data))
+        except Exception as e:
+            print("\nFallo de la validación MAC durante la desencriptación. Auntenticación no garantizada")
+
+        return (decrypted_data).decode(), {}
 
     async def encryption_AE(self, passphrase: str, sensitive_data: str):
         # Key generation
