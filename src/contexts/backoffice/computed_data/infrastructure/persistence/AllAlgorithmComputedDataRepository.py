@@ -1,7 +1,8 @@
 from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives._serialization import PublicFormat, Encoding
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
-
+from cryptography.hazmat.primitives.serialization import load_pem_public_key
 
 
 from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKey import CryptoKey
@@ -20,7 +21,7 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
                                                cd_type: ComputedDataType) -> ComputedData:
         output = ''
         if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN.value:
-            output = self.__ECDH(key.payload.value(), input.value())
+            output = await self.ecdh_get_shared_key_platform(key.payload.value())
 
         data = ComputedData(
             input,
@@ -31,23 +32,20 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
         return data
 
 
-
-    def __ECDH(self, private_key:str, public_key:str):
-        return private_key
-        public_key = str.encode(public_key)
-        private_key = str.encode(private_key)
-
-        # ec.generate_private_key(ec.SECP384R1(), )
-        # serialization.load_pem_parameters()
-        # Input para shared key IoT: ID clave privada IoT, ID clave pública plataforma
+    async def ecdh_get_shared_key_platform(self, public_key_IoT: str):
+        # Input para shared key Platform: ID clave pública IoT
         # Returns shared key IoT
-        # Input para shared key plataforma: ID clave privada platform, ID clave pública IoT
+
+        # Plataforma genera su clave pública y privada (y la pública se almacena en la bbdd para el IoT)
+        private_key = ec.generate_private_key(ec.SECP384R1())
+        public_key = private_key.public_key()
+        str_public_key = public_key.public_bytes(Encoding.PEM, PublicFormat.SubjectPublicKeyInfo).decode('utf-8')
+
+        # 1. Obtener clave pública en string de la bd y pasar a objeto key
+        public_key_IoT_pem = public_key_IoT.encode('utf-8')
+        loaded_public_key_IoT = load_pem_public_key(public_key_IoT_pem)
+
         # Returns shared key platform
-        shared_key = private_key.exchange(ec.ECDH(), public_key)
-        derived_key = HKDF(
-            algorithm=hashes.SHA256(),
-            length=32,
-            salt=None,
-            info=b'handshake data',
-        ).derive(shared_key)
-        return derived_key
+        shared_key = private_key.exchange(ec.ECDH(), loaded_public_key_IoT)
+
+        return shared_key.hex()

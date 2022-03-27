@@ -7,6 +7,7 @@ class ComputedDataTypes(Enum):
 
     ENCRYPT = 'encrypt'
     DECRYPT = 'decrypt'
+    KEY_EXCHANGE = 'key-exchange'
 
     @classmethod
     def has_value(cls, value):
