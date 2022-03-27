@@ -21,12 +21,15 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
 
     async def find_one_by_crypto_key_and_input(self, key: CryptoKey, input: ComputedDataInput,
                                                cd_type: ComputedDataType) -> ComputedData:
-        output = ''
+        output = input.value()
         if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN.value:
             output = await self.ecdh_get_shared_key_platform(key.payload.value())
 
         if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN_HMAC.value:
-            output = await self.hmac_DH_GetSharedKey_Platform(key.parameters.value(), key.payload.value())
+            parameters = key.parameters.value()
+            dh_parameters = parameters['parameters']
+            signature = parameters['signature']
+            output = await self.hmac_DH_GetSharedKey_Platform(dh_parameters, key.payload.value(), signature)
 
         data = ComputedData(
             input,
