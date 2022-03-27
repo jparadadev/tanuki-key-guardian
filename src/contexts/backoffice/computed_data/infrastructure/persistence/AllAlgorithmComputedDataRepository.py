@@ -94,4 +94,4 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
 
         shared_key = platform_private_key.exchange(loaded_public_key_IoT)
         # Devuelve la clave en string, el IoT debe enviar al KMS luego de nuevo esta clave para que la almacene
-        return shared_key.hex(), {'generated-public-key': str_platform_pk, 'signature': str_signature}
+        return shared_key.hex(), {'generated-public-key': str_platform_pk, 'signature': str_signature, 'parameters': dh_parameters}
