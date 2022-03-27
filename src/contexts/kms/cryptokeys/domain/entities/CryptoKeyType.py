@@ -12,6 +12,7 @@ class CryptoKeyTypes(Enum):
     DIFFIE_HELLMAN_HMAC = 'diffie-hellman-hmac'
     DES = 'des'
     AES = 'aes'
+    AE = 'ae'
 
     @classmethod
     def has_value(cls, value):
