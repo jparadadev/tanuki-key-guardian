@@ -1,5 +1,7 @@
 import sys
 
+from Crypto.Cipher import AES
+from Crypto.Protocol.KDF import PBKDF2
 from cryptography.hazmat.primitives import hashes, hmac
 from cryptography.hazmat.primitives._serialization import PublicFormat, Encoding
 from cryptography.hazmat.primitives.asymmetric import ec
@@ -12,7 +14,7 @@ from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyType import Cry
 from src.contexts.backoffice.computed_data.domain.entities.ComputedData import ComputedData
 from src.contexts.backoffice.computed_data.domain.entities.ComputedDataInput import ComputedDataInput
 from src.contexts.backoffice.computed_data.domain.entities.ComputedDataOutput import ComputedDataOutput
-from src.contexts.backoffice.computed_data.domain.entities.ComputedDataType import ComputedDataType
+from src.contexts.backoffice.computed_data.domain.entities.ComputedDataType import ComputedDataType, ComputedDataTypes
 from src.contexts.backoffice.computed_data.domain.repositories.ComputedDataRepository import ComputedDataRepository
 from src.contexts.shared.domain.BaseObject import BaseObject
 
@@ -32,6 +34,13 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
             signature = parameters['signature']
             output, meta = await self.hmac_DH_GetSharedKey_Platform(dh_parameters, key.payload.value(), signature)
 
+        if key.type.value() == CryptoKeyTypes.AE.value and cd_type.value() == ComputedDataTypes.ENCRYPT.value:
+            output, meta = await self.encryption_AE(key.payload.value(), input.value())
+
+        if key.type.value() == CryptoKeyTypes.AE.value and cd_type.value() == ComputedDataTypes.DECRYPT.value:
+            text, nonce = tuple(input.value().split('@'))
+            output, meta = await self.decrypt_AE(key.payload.value(), text, nonce)
+
         data = ComputedData(
             input,
             ComputedDataOutput(output),
@@ -40,6 +49,53 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
             ComputedDataMeta(meta),
         )
         return data
+
+    async def encryption_AE(self, passphrase: str, sensitive_data: str):
+        # Key generation
+        key_gen = b"/\x84F\xc5\xddA^k\xd2.C\x19'\x1a2\x9c"  # Key derivation
+        key = PBKDF2(passphrase, key_gen)  # Contraseña basada en key derivation
+        print("AES Encryption Key: " + str(key))
+
+        # Data sensitiva para cifrar
+        print("Data enviada para cifrar: " + "\n" + str(sensitive_data))
+
+        # Encriptación usando AES GCM
+        cipher = AES.new(key, AES.MODE_GCM)  # https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html
+        ciphertext, tag = cipher.encrypt_and_digest(sensitive_data.encode('utf-8'))
+        nonce = cipher.nonce
+
+        # Mensaje transmitido
+        # ciphertext: resultado de los datos cifrados,
+        # tag: Codigo de autenticacion de mensajes MAC
+        # nonce: vector de inicializacion (solo ocurre una vez)
+        transmitted_message = ciphertext.hex()
+        meta = {
+            'tag': tag.hex(),
+            'nonce': nonce.hex(),
+        }
+        print("\nMensaje transmitido: " + str(transmitted_message))
+        print(type(transmitted_message))
+        return f'{transmitted_message}@{nonce.hex()}', meta
+
+    async def decrypt_AE(self, passphrase: str, transmitted_message: str, nonce: str):
+        received_msg = transmitted_message
+        print("\nMensaje recibido: " + str(received_msg))
+        received_kdf_salt = b"/\x84F\xc5\xddA^k\xd2.C\x19'\x1a2\x9c"  # Key derivation
+        received_ciphertext, received_nonce = bytes.fromhex(transmitted_message), bytes.fromhex(nonce)
+
+        # Generar decryption key con la contraseña y salt
+        decryption_key = PBKDF2(passphrase, received_kdf_salt)
+        print("Decryption Key: " + str(decryption_key))
+
+        # Validar MAC y descifrar, si la validación MAC falla, ValueError exception se va a mostrar
+        cipher = AES.new(decryption_key, AES.MODE_GCM, received_nonce)
+        try:
+            decrypted_data = cipher.decrypt(received_ciphertext)
+            print("Data descifrada: " + str(decrypted_data))
+        except ValueError as mac_mismatch:
+            print("\nFallo de la validación MAC durante la desencriptación. Auntenticación no garantizada")
+
+        return decrypted_data.decode('utf-8'), {}
 
     async def ecdh_get_shared_key_platform(self, public_key_IoT: str) -> (str, dict):
         # Input para shared key Platform: ID clave pública IoT
