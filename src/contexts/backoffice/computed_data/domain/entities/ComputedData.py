@@ -4,7 +4,7 @@ from src.contexts.backoffice.computed_data.domain.entities.ComputedDataInput imp
 from src.contexts.backoffice.computed_data.domain.entities.ComputedDataMeta import ComputedDataMeta
 from src.contexts.backoffice.computed_data.domain.entities.ComputedDataOutput import ComputedDataOutput
 from src.contexts.backoffice.computed_data.domain.entities.ComputedDataType import ComputedDataType
-from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
+from src.contexts.backoffice.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
 from src.contexts.shared.domain.valueobj.AggregateRoot import AggregateRoot
 
 

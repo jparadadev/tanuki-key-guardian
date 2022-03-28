@@ -5,7 +5,7 @@ from fastapi import APIRouter, Query
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from src.apps.kms.controllers.ComputedDataGetController import ComputedDataGetController
+from src.apps.backoffice.backend.controllers.ComputedDataGetController import ComputedDataGetController
 from src.apps.backoffice.backend.dependencies.BackofficeContainer import backoffice_container, BackofficeContainer
 
 
