@@ -8,7 +8,7 @@ class PyMongoClientConfigFactory:
     @staticmethod
     def create() -> PyMongoConfiguration:
         config = PyMongoConfiguration(
-            EnvManager.get(EnvVar.SHARED_CLIENT_MONGO_HOST),
-            EnvManager.get(EnvVar.SHARED_CLIENT_MONGO_PORT, parser=int),
+            EnvManager.get(EnvVar.KMS_CLIENT_MONGO_HOST),
+            EnvManager.get(EnvVar.KMS_CLIENT_MONGO_PORT, parser=int),
         )
         return config

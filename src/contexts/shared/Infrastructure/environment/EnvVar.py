@@ -6,25 +6,18 @@ class EnvVar(Enum):
     ENV_MODE = 'env_mode'
 
     # -------------------------------------------------------
-    # -------------------- BACKOFFICE -----------------------
+    # ----------------------- KMS ---------------------------
     # -------------------------------------------------------
 
-    BACKOFFICE_SERVER_HOST = 'kms.server.host'
-    BACKOFFICE_SERVER_PORT = 'kms.server.port'
+    KMS_SERVER_HOST = 'kms.server.host'
+    KMS_SERVER_PORT = 'kms.server.port'
 
-    # -------------------------------------------------------
-    # -------------------- CA -----------------------
-    # -------------------------------------------------------
+    KMS_CLIENT_MONGO_HOST = 'kms.client.mongo.host'
+    KMS_CLIENT_MONGO_PORT = 'kms.client.mongo.port'
 
-    CA_SERVER_HOST = 'ca.server.host'
-    CA_SERVER_PORT = 'ca.server.port'
+    KMS_CRYPTOKEY_MONGO_HOST = 'kms.cryptokey.mongo.host'
+    KMS_CRYPTOKEY_MONGO_PORT = 'kms.cryptokey.mongo.port'
 
     # -------------------------------------------------------
     # ---------------------- SHARED -------------------------
     # -------------------------------------------------------
-
-    SHARED_CLIENT_MONGO_HOST = 'shared.client.mongo.host'
-    SHARED_CLIENT_MONGO_PORT = 'shared.client.mongo.port'
-
-    SHARED_CRYPTOKEY_MONGO_HOST = 'shared.cryptokey.mongo.host'
-    SHARED_CRYPTOKEY_MONGO_PORT = 'shared.cryptokey.mongo.port'

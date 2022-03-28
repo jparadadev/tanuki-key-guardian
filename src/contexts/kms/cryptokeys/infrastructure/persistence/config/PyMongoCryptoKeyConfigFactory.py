@@ -8,7 +8,7 @@ class PyMongoCryptoKeyConfigFactory:
     @staticmethod
     def create() -> PyMongoConfiguration:
         config = PyMongoConfiguration(
-            EnvManager.get(EnvVar.SHARED_CRYPTOKEY_MONGO_HOST),
-            EnvManager.get(EnvVar.SHARED_CRYPTOKEY_MONGO_PORT, parser=int),
+            EnvManager.get(EnvVar.KMS_CRYPTOKEY_MONGO_HOST),
+            EnvManager.get(EnvVar.KMS_CRYPTOKEY_MONGO_PORT, parser=int),
         )
         return config
