@@ -14,7 +14,7 @@ deps:
 test:
 	python -m unittest discover -s ./tests -p '*Test.py'
 
-# Run backoffice app
+# Run KMS app
 .PHONY = run/kms
 run/kms:
 	python main.py --service kms
