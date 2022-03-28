@@ -15,6 +15,6 @@ test:
 	python3 -m unittest discover -s ./tests -p '*Test.py'
 
 # Run backoffice app
-.PHONY = run/backoffice
-run/backoffice:
-	python3 main.py --service backoffice
+.PHONY = run/kms
+run/kms:
+	python3 main.py --service kms
