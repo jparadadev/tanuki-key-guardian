@@ -8,7 +8,7 @@ from starlette.responses import JSONResponse
 from src.apps.kms.backend.controllers.CryptoKeyPostController import CryptoKeyPostController
 from src.apps.kms.backend.controllers.CryptoKeysGetController import CryptoKeysGetController
 from src.apps.kms.backend.dependencies.KmsContainer import KmsContainer, kms_container
-from src.contexts.kms.cryptokeys.infrastructure.create_one.CreateCryptoKeyCommandDto import \
+from src.apps.kms.backend.dtos.CreateCryptoKeyCommandDto import \
     CreateCryptoKeyCommandDto
 
 

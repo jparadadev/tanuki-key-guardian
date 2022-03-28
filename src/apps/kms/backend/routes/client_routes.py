@@ -9,7 +9,7 @@ from src.apps.kms.backend.controllers.ClientDeleteController import ClientDelete
 from src.apps.kms.backend.controllers.ClientsGetController import ClientsGetController
 from src.apps.kms.backend.controllers.ClientPostController import ClientPostController
 from src.apps.kms.backend.dependencies.KmsContainer import KmsContainer, kms_container
-from src.contexts.kms.clients.infrastructure.create_one.CreateClientCommandDto import CreateClientCommandDto
+from src.apps.kms.backend.dtos.CreateClientCommandDto import CreateClientCommandDto
 
 
 @inject
