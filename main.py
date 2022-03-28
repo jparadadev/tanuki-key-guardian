@@ -1,6 +1,6 @@
 import argparse
 
-from src.apps.backoffice.backend.boot import boot as boot_kms
+from src.apps.kms.backend.boot import boot as boot_kms
 
 
 service_mapping = {

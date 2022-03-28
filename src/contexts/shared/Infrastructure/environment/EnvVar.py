@@ -9,8 +9,8 @@ class EnvVar(Enum):
     # -------------------- BACKOFFICE -----------------------
     # -------------------------------------------------------
 
-    BACKOFFICE_SERVER_HOST = 'backoffice.server.host'
-    BACKOFFICE_SERVER_PORT = 'backoffice.server.port'
+    BACKOFFICE_SERVER_HOST = 'kms.server.host'
+    BACKOFFICE_SERVER_PORT = 'kms.server.port'
 
     # -------------------------------------------------------
     # -------------------- CA -----------------------
