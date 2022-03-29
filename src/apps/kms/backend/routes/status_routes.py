@@ -4,7 +4,7 @@ from dependency_injector.wiring import inject, Provide
 from fastapi import APIRouter
 from starlette.requests import Request
 
-from src.apps.kms.backend.controllers.StatusGetController import StatusGetController
+from src.apps.kms.backend.controllers.health.StatusGetController import StatusGetController
 from src.apps.kms.backend.dependencies.KmsContainer import KmsContainer, kms_container
 
 

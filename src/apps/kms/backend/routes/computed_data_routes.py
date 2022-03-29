@@ -5,7 +5,7 @@ from fastapi import APIRouter, Query
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from src.apps.kms.backend.controllers.ComputedDataGetController import ComputedDataGetController
+from src.apps.kms.backend.controllers.computed_data.ComputedDataGetController import ComputedDataGetController
 from src.apps.kms.backend.dependencies.KmsContainer import kms_container, KmsContainer
 
 

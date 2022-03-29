@@ -5,10 +5,10 @@ from fastapi import APIRouter
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
-from src.apps.kms.backend.controllers.CryptoKeyPostController import CryptoKeyPostController
-from src.apps.kms.backend.controllers.CryptoKeysGetController import CryptoKeysGetController
+from src.apps.kms.backend.controllers.crypto_key.CryptoKeyPostController import CryptoKeyPostController
+from src.apps.kms.backend.controllers.crypto_key.CryptoKeysGetController import CryptoKeysGetController
 from src.apps.kms.backend.dependencies.KmsContainer import KmsContainer, kms_container
-from src.apps.kms.backend.dtos.CreateCryptoKeyCommandDto import \
+from src.apps.kms.backend.dtos.crypto_key.CreateCryptoKeyCommandDto import \
     CreateCryptoKeyCommandDto
 
 

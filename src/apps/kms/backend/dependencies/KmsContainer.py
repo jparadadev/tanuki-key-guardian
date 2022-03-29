@@ -1,12 +1,12 @@
 from dependency_injector import containers, providers
 
-from src.apps.kms.backend.controllers.ClientDeleteController import ClientDeleteController
-from src.apps.kms.backend.controllers.ComputedDataGetController import ComputedDataGetController
-from src.apps.kms.backend.controllers.CryptoKeyPostController import CryptoKeyPostController
-from src.apps.kms.backend.controllers.CryptoKeysGetController import CryptoKeysGetController
-from src.apps.kms.backend.controllers.StatusGetController import StatusGetController
-from src.apps.kms.backend.controllers.ClientsGetController import ClientsGetController
-from src.apps.kms.backend.controllers.ClientPostController import ClientPostController
+from src.apps.kms.backend.controllers.client.ClientDeleteController import ClientDeleteController
+from src.apps.kms.backend.controllers.computed_data.ComputedDataGetController import ComputedDataGetController
+from src.apps.kms.backend.controllers.crypto_key.CryptoKeyPostController import CryptoKeyPostController
+from src.apps.kms.backend.controllers.crypto_key.CryptoKeysGetController import CryptoKeysGetController
+from src.apps.kms.backend.controllers.health.StatusGetController import StatusGetController
+from src.apps.kms.backend.controllers.client.ClientsGetController import ClientsGetController
+from src.apps.kms.backend.controllers.client.ClientPostController import ClientPostController
 from src.contexts.kms.clients.application.create_one.CreateClientCommandHandler import CreateClientCommandHandler
 from src.contexts.kms.clients.application.create_one.ClientCreator import ClientCreator
 from src.contexts.kms.clients.application.delete_one.ClientDeleter import ClientDeleter
