@@ -4,6 +4,7 @@ from src.apps.kms.backend.controllers.client.ClientDeleteController import Clien
 from src.apps.kms.backend.controllers.computed_data.ComputedDataGetController import ComputedDataGetController
 from src.apps.kms.backend.controllers.crypto_key.CryptoKeyPostController import CryptoKeyPostController
 from src.apps.kms.backend.controllers.crypto_key.CryptoKeysGetController import CryptoKeysGetController
+from src.apps.kms.backend.controllers.crypto_key.RotateCryptoKeyPutController import RotateCryptoKeyPutController
 from src.apps.kms.backend.controllers.health.StatusGetController import StatusGetController
 from src.apps.kms.backend.controllers.client.ClientsGetController import ClientsGetController
 from src.apps.kms.backend.controllers.client.ClientPostController import ClientPostController
@@ -29,6 +30,9 @@ from src.contexts.kms.cryptokeys.application.create_one.CryptoKeyCreator import 
 from src.contexts.kms.cryptokeys.application.findall.CryptoKeysByCriteriaFinder import CryptoKeysByCriteriaFinder
 from src.contexts.kms.cryptokeys.application.findall.FindCryptoKeysByCriteriaQueryHandler import \
     FindCryptoKeysByCriteriaQueryHandler
+from src.contexts.kms.cryptokeys.application.rotate_one.CryptoKeyRotator import CryptoKeyRotator
+from src.contexts.kms.cryptokeys.application.rotate_one.RotateCryptoKeyCommandHandler import \
+    RotateCryptoKeyCommandHandler
 from src.contexts.kms.cryptokeys.infrastructure.persistence.PyMongoCryptoKeyRepository import \
     PyMongoCryptoKeyRepository
 from src.contexts.shared.Infrastructure.commandbus.InMemoryCommandBus import InMemoryCommandBus
@@ -80,6 +84,12 @@ class KmsContainer(containers.DeclarativeContainer):
         cryptokey_creator,
     )
 
+    cryptokey_rotator = providers.Singleton(CryptoKeyRotator, cryptokey_repository, event_bus)
+    rotate_cryptokey_command_handler = providers.Singleton(
+        RotateCryptoKeyCommandHandler,
+        cryptokey_rotator,
+    )
+
     computed_data_by_key_and_input_finder = providers.Singleton(
         ComputedDataByKeyAndInputFinder,
         cryptokey_repository,
@@ -102,6 +112,7 @@ class KmsContainer(containers.DeclarativeContainer):
         create_client_command_handler,
         create_cryptokey_command_handler,
         delete_client_command_handler,
+        rotate_cryptokey_command_handler,
     )
 
     status_get_controller = providers.Singleton(StatusGetController)
@@ -110,6 +121,7 @@ class KmsContainer(containers.DeclarativeContainer):
     client_delete_controller = providers.Singleton(ClientDeleteController, command_bus)
     cryptokeys_get_controller = providers.Singleton(CryptoKeysGetController, query_bus)
     cryptokeys_post_controller = providers.Singleton(CryptoKeyPostController, command_bus)
+    rotate_cryptokey_put_controller = providers.Singleton(RotateCryptoKeyPutController, command_bus)
     computed_data_get_controller = providers.Singleton(ComputedDataGetController, query_bus)
 
 

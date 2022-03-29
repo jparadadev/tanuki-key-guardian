@@ -21,7 +21,7 @@ class RotateCryptoKeyPutController(KmsController):
 
     async def run(self, req: Request) -> JSONResponse:
         params = req.path_params
-        command = RotateCryptoKeyCommand(params.get('key-id'))
+        command = RotateCryptoKeyCommand(params.get('key_id'))
         try:
             await self._command_bus.dispatch(command)
         except DomainError as err:
