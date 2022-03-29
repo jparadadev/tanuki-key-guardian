@@ -46,5 +46,8 @@ class PyMongoRepository(ABC):
     async def _create_one(self, raw_obj: Dict[str, Any]) -> Any:
         self._collection.insert_one(raw_obj)
 
+    async def _update_one(self, query: Dict[str, Any], raw_obj: Dict[str, Any]) -> Any:
+        self._collection.update_one(query, raw_obj)
+
     async def _delete_one(self, raw_query: Dict[str, Any]) -> Any:
         self._collection.delete_one(raw_query)

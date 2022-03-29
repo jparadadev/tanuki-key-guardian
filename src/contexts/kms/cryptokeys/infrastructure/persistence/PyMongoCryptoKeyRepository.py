@@ -6,6 +6,7 @@ from pymongo.errors import DuplicateKeyError
 from src.contexts.kms.cryptokeys.domain.create_one.CryptoAlreadyExistsError import CryptoKeyAlreadyExistsError
 from src.contexts.kms.cryptokeys.domain.entities.CryptoKey import CryptoKey
 from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
+from src.contexts.kms.cryptokeys.domain.find_one.CryptoKeyNotFoundError import CryptoKeyNotFoundError
 from src.contexts.kms.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 from src.contexts.shared.Infrastructure.persistence.mongo.PyMongoRepository import PyMongoRepository
 from src.contexts.shared.domain.CriteriaQueryMetadata import CriteriaQueryMetadata
@@ -46,3 +47,10 @@ class PyMongoCryptoKeyRepository(PyMongoRepository, CryptoKeyRepository):
             return cryptokey
         except DuplicateKeyError as _:
             raise CryptoKeyAlreadyExistsError('CryptoKey with ID <{}> already exists.'.format(cryptokey.id.value()))
+
+    async def update_one(self, cryptokey: CryptoKey) -> NoReturn:
+        try:
+            cryptokey = await super()._update_one({'id': cryptokey.id.value()}, cryptokey.to_primitives())
+            return cryptokey
+        except Exception as _:
+            raise CryptoKeyNotFoundError('CryptoKey with ID <{}> not found.'.format(cryptokey.id.value()))
