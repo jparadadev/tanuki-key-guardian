@@ -1,7 +1,7 @@
 import sys
 
 from dependency_injector.wiring import inject, Provide
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Header
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
@@ -15,8 +15,8 @@ def register(
         computed_data_get_controller: ComputedDataGetController = Provide[KmsContainer.computed_data_get_controller],
 ):
     @router.get('/computed', tags=["Computed Data"])
-    async def run_wrapper(req: Request, input=Query(None), key_id=Query(None, alias='key-id'),
-                          type=Query(None)) -> JSONResponse:
+    async def run_wrapper(req: Request, input=Header(None, alias='X-Input'), key_id=Header(None, alias='X-Key-Id'),
+                          type=Header(None, alias='X-Type')) -> JSONResponse:
         return await computed_data_get_controller.run(req)
 
 
