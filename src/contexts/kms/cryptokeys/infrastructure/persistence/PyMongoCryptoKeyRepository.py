@@ -38,6 +38,8 @@ class PyMongoCryptoKeyRepository(PyMongoRepository, CryptoKeyRepository):
 
     async def find_by_id(self, key_id: CryptoKeyId) -> Optional[CryptoKeyId]:
         result = await super()._find_one({'id': key_id.value()})
+        if result is None:
+            raise CryptoKeyNotFoundError()
         entity = CryptoKey.create_from_primitives(result)
         return entity
 
