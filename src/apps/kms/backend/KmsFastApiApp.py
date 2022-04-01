@@ -34,12 +34,12 @@ class KmsFastApiApp:
                 'name': 'Apache 2.0'
             }
         )
-        servers = []
-        if current_host and current_port:
-            servers.append({
-                'url': f'{current_host}:{current_port}',
-                'description': 'Localhost'
-            })
+        # servers = []
+        # if current_host and current_port:
+        #     servers.append({
+        #         'url': f'{current_host}:{current_port}',
+        #         'description': 'Localhost'
+        #     })
 
         # servers.extend([
         #     {
@@ -48,7 +48,7 @@ class KmsFastApiApp:
         #     }
         # ])
 
-        openapi_schema['servers'] = servers
+        # openapi_schema['servers'] = servers
         self._app.openapi_schema = openapi_schema
         return self._app.openapi_schema
 
