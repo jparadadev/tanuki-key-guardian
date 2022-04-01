@@ -22,8 +22,8 @@ class ClientDeleteController(KmsController):
         self._error_handler = JsonResponseErrorHandler()
 
     async def run(self, req: Request) -> JSONResponse:
-        body: Dict[str, Any] = await req.json()
-        command = DeleteClientCommand(body.get('id'))
+        params = dict(req.path_params)
+        command = DeleteClientCommand(params.get('client_id'))
         try:
             await self._command_bus.dispatch(command)
         except DomainError as err:

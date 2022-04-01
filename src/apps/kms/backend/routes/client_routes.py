@@ -17,7 +17,7 @@ def register(
         router: APIRouter,
         clients_get_controller: ClientsGetController = Provide[KmsContainer.clients_get_controller],
         client_post_controller: ClientPostController = Provide[KmsContainer.client_post_controller],
-        client_delete_controller: ClientDeleteController = Provide[KmsContainer.client_post_controller],
+        client_delete_controller: ClientDeleteController = Provide[KmsContainer.client_delete_controller],
 ):
     @router.post('/clients', tags=["Clients"])
     async def run_wrapper(_: CreateClientCommandDto, req: Request) -> JSONResponse:
