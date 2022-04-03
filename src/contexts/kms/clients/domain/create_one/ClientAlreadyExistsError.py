@@ -4,7 +4,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class ClientAlreadyExistsError(DomainError):
-
     ERROR_ID = '8eb9e014-76d2-47fc-81f4-c9257095f8c2'
 
     def __init__(self, msg: str = None):

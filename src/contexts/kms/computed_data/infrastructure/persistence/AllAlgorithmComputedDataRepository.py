@@ -4,18 +4,18 @@ from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
 from cryptography.hazmat.primitives import hashes, hmac
 from cryptography.hazmat.primitives._serialization import PublicFormat, Encoding
-from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.asymmetric import dh
+from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.serialization import load_pem_public_key, load_pem_parameters
 
-from src.contexts.kms.computed_data.domain.entities.ComputedDataMeta import ComputedDataMeta
-from src.contexts.kms.cryptokeys.domain.entities.CryptoKey import CryptoKey
-from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyTypes
 from src.contexts.kms.computed_data.domain.entities.ComputedData import ComputedData
 from src.contexts.kms.computed_data.domain.entities.ComputedDataInput import ComputedDataInput
+from src.contexts.kms.computed_data.domain.entities.ComputedDataMeta import ComputedDataMeta
 from src.contexts.kms.computed_data.domain.entities.ComputedDataOutput import ComputedDataOutput
 from src.contexts.kms.computed_data.domain.entities.ComputedDataType import ComputedDataType, ComputedDataTypes
 from src.contexts.kms.computed_data.domain.repositories.ComputedDataRepository import ComputedDataRepository
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKey import CryptoKey
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyType import CryptoKeyTypes
 from src.contexts.shared.domain.BaseObject import BaseObject
 
 
@@ -164,7 +164,8 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
 
         return shared_key.hex(), {'generated-public-key': str_public_key}
 
-    async def hmac_DH_GetSharedKey_Platform(self, dh_parameters: str, public_key_IoT: str, pk_signature: str) -> (str, dict):
+    async def hmac_DH_GetSharedKey_Platform(self, dh_parameters: str, public_key_IoT: str, pk_signature: str) -> (
+    str, dict):
         # A la API le llega el id de la clave y de ahí saca el string de parámetros y de la public key del IoT
 
         # En este punto, el KMS ya tiene los dh_parameters y la clave pública en string y debe convertirlo al objeto original
@@ -199,4 +200,5 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
 
         shared_key = platform_private_key.exchange(loaded_public_key_IoT)
         # Devuelve la clave en string, el IoT debe enviar al KMS luego de nuevo esta clave para que la almacene
-        return shared_key.hex(), {'generated-public-key': str_platform_pk, 'signature': str_signature, 'parameters': dh_parameters}
+        return shared_key.hex(), {'generated-public-key': str_platform_pk, 'signature': str_signature,
+                                  'parameters': dh_parameters}

@@ -6,7 +6,6 @@ from src.contexts.shared.domain.valueobj.AggregateRoot import AggregateRoot
 
 
 class ClientCreatedDomainEvent(DomainEvent):
-
     EVENT_TYPE = 'clients.created'
 
     def __init__(

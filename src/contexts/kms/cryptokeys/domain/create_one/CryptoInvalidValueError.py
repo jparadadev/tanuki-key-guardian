@@ -4,7 +4,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class CryptoKeyInvalidValueError(DomainError):
-
     ERROR_ID = '8fd818c5-10dc-4639-82ac-d4b37394517d'
 
     def __init__(self, msg: str = None):

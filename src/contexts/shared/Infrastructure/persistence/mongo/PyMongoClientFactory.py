@@ -6,7 +6,6 @@ from src.contexts.shared.Infrastructure.persistence.mongo.PyMongoConfiguration i
 
 
 class PyMongoClientFactory:
-
     _clients: Dict[str, MongoClient] = {}
 
     @staticmethod

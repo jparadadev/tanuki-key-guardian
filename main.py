@@ -2,7 +2,6 @@ import argparse
 
 from src.apps.kms.backend.boot import boot as boot_kms
 
-
 service_mapping = {
     'kms': boot_kms,
 }

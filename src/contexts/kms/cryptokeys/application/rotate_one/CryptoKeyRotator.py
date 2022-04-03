@@ -1,8 +1,10 @@
+import random
+
 from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
 from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyPayload import CryptoKeyPayload
 from src.contexts.kms.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 from src.contexts.shared.domain.EventBus import EventBus
-import random
+
 
 class CryptoKeyRotator:
 
@@ -23,6 +25,6 @@ class CryptoKeyRotator:
         # TODO: rotation
         uid(crypto_key.payload.value())
         rote = uid(crypto_key.payload.value())
-        crypto_key.payload= CryptoKeyPayload(rote)
+        crypto_key.payload = CryptoKeyPayload(rote)
         await self._cryptokey_repository.update_one(crypto_key)
         # TODO: dispatch key rotated event

@@ -6,7 +6,6 @@ from src.contexts.shared.domain.criteria.Criteria import Criteria
 
 
 class FindClientsByCriteriaQueryHandler(QueryHandler):
-
     _subscription: str = FindClientsByCriteriaQuery.QUERY_TYPE
 
     def __init__(self, finder: ClientsByCriteriaFinder):

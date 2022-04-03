@@ -1,4 +1,3 @@
-from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
 from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInputFinder import \
     ComputedDataByKeyAndInputFinder
 from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInputQuery import \
@@ -6,11 +5,11 @@ from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInp
 from src.contexts.kms.computed_data.application.find_one.KmsComputedDataResponse import KmsComputedDataResponse
 from src.contexts.kms.computed_data.domain.entities.ComputedDataInput import ComputedDataInput
 from src.contexts.kms.computed_data.domain.entities.ComputedDataType import ComputedDataType
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
 from src.contexts.shared.domain.QueryHandler import QueryHandler
 
 
 class ComputedDataByKeyAndInputQueryHandler(QueryHandler):
-
     _subscription: str = ComputedDataByKeyAndInputQuery.QUERY_TYPE
 
     def __init__(self, finder: ComputedDataByKeyAndInputFinder):

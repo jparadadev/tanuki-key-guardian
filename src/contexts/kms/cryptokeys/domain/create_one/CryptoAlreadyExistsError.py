@@ -4,7 +4,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class CryptoKeyAlreadyExistsError(DomainError):
-
     ERROR_ID = '9d45faad-9d21-462a-a51f-3d3070bcf2da'
 
     def __init__(self, msg: str = None):

@@ -19,6 +19,7 @@ class CryptoKeyCreator:
     async def run(self, cryptokey_id: CryptoKeyId, client_id: ClientId, cryptokey_type: CryptoKeyType,
                   payload: CryptoKeyPayload, parameters: CryptoKeyParameters, is_master: CryptoKeyIsMaster,
                   is_private: CryptoKeyIsPrivate):
-        cryptokey: CryptoKey = CryptoKey.create(cryptokey_id, client_id, cryptokey_type, payload, parameters, is_master, is_private)
+        cryptokey: CryptoKey = CryptoKey.create(cryptokey_id, client_id, cryptokey_type, payload, parameters, is_master,
+                                                is_private)
         await self._cryptokey_repository.create_one(cryptokey)
         await self._event_bus.publish(cryptokey.pull_domain_events())

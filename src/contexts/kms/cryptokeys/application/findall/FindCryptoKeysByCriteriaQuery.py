@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List
 
 from src.contexts.shared.domain.Query import Query
 from src.contexts.shared.domain.criteria.Filter import Filter
@@ -7,7 +7,6 @@ from src.contexts.shared.domain.criteria.OrderBy import OrderBy
 
 
 class FindCryptoKeysByCriteriaQuery(Query):
-
     QUERY_TYPE: str = 'kms.cryptokey.find-by-criteria'
 
     def __init__(

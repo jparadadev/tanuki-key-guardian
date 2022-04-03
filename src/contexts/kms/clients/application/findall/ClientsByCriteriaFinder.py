@@ -11,4 +11,3 @@ class ClientsByCriteriaFinder:
     async def run(self, criteria: Criteria) -> BackofficeClientsResponse:
         clients, criteria_metadata = await self._client_repository.find_by_criteria(criteria)
         return BackofficeClientsResponse(clients, criteria_metadata)
-

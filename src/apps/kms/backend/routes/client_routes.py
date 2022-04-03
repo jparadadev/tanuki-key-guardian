@@ -6,8 +6,8 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from src.apps.kms.backend.controllers.client.ClientDeleteController import ClientDeleteController
-from src.apps.kms.backend.controllers.client.ClientsGetController import ClientsGetController
 from src.apps.kms.backend.controllers.client.ClientPostController import ClientPostController
+from src.apps.kms.backend.controllers.client.ClientsGetController import ClientsGetController
 from src.apps.kms.backend.dependencies.KmsContainer import KmsContainer, kms_container
 from src.apps.kms.backend.dtos.client.CreateClientCommandDto import CreateClientCommandDto
 

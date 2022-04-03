@@ -3,7 +3,6 @@ from src.contexts.shared.domain.Command import Command
 
 
 class CreateClientCommand(BaseObject, Command):
-
     COMMAND_TYPE: str = 'kms.create-one.clients'
 
     def __init__(self, client_id: str, name: str):

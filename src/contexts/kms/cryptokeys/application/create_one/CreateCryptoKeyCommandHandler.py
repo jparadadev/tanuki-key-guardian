@@ -14,7 +14,6 @@ from src.contexts.shared.domain.CommandHandler import CommandHandler
 
 
 class CreateCryptoKeyCommandHandler(BaseObject, CommandHandler):
-
     _subscription: str = CreateCryptoKeyCommand.COMMAND_TYPE
 
     def __init__(self, creator: CryptoKeyCreator):
@@ -32,5 +31,3 @@ class CreateCryptoKeyCommandHandler(BaseObject, CommandHandler):
         is_master: CryptoKeyIsMaster = CryptoKeyIsMaster(command.is_master)
         is_private: CryptoKeyIsPrivate = CryptoKeyIsPrivate(command.is_private)
         await self._creator.run(cryptokey_id, client_id, cryptokey_type, payload, parameters, is_master, is_private)
-
-

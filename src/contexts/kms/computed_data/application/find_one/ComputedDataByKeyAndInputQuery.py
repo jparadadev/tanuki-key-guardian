@@ -2,7 +2,6 @@ from src.contexts.shared.domain.Query import Query
 
 
 class ComputedDataByKeyAndInputQuery(Query):
-
     QUERY_TYPE: str = 'kms.computed-data.find-by-key-and-input'
 
     def __init__(

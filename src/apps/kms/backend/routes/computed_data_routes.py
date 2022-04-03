@@ -1,7 +1,7 @@
 import sys
 
 from dependency_injector.wiring import inject, Provide
-from fastapi import APIRouter, Query, Header
+from fastapi import APIRouter, Header
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 

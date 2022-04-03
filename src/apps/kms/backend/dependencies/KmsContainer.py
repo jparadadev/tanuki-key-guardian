@@ -1,15 +1,15 @@
 from dependency_injector import containers, providers
 
 from src.apps.kms.backend.controllers.client.ClientDeleteController import ClientDeleteController
+from src.apps.kms.backend.controllers.client.ClientPostController import ClientPostController
+from src.apps.kms.backend.controllers.client.ClientsGetController import ClientsGetController
 from src.apps.kms.backend.controllers.computed_data.ComputedDataGetController import ComputedDataGetController
 from src.apps.kms.backend.controllers.crypto_key.CryptoKeyPostController import CryptoKeyPostController
 from src.apps.kms.backend.controllers.crypto_key.CryptoKeysGetController import CryptoKeysGetController
 from src.apps.kms.backend.controllers.crypto_key.RotateCryptoKeyPutController import RotateCryptoKeyPutController
 from src.apps.kms.backend.controllers.health.StatusGetController import StatusGetController
-from src.apps.kms.backend.controllers.client.ClientsGetController import ClientsGetController
-from src.apps.kms.backend.controllers.client.ClientPostController import ClientPostController
-from src.contexts.kms.clients.application.create_one.CreateClientCommandHandler import CreateClientCommandHandler
 from src.contexts.kms.clients.application.create_one.ClientCreator import ClientCreator
+from src.contexts.kms.clients.application.create_one.CreateClientCommandHandler import CreateClientCommandHandler
 from src.contexts.kms.clients.application.delete_one.ClientDeleter import ClientDeleter
 from src.contexts.kms.clients.application.delete_one.DeleteClientCommandHandler import DeleteClientCommandHandler
 from src.contexts.kms.clients.application.findall.ClientsByCriteriaFinder import ClientsByCriteriaFinder
@@ -42,7 +42,6 @@ from src.contexts.shared.Infrastructure.querybus.InMemoryQueryBus import InMemor
 
 
 class KmsContainer(containers.DeclarativeContainer):
-
     event_bus = providers.Singleton(
         InMemoryEventBus,
     )
@@ -126,5 +125,3 @@ class KmsContainer(containers.DeclarativeContainer):
 
 
 kms_container: KmsContainer = KmsContainer()
-
-

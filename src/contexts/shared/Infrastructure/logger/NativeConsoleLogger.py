@@ -6,7 +6,6 @@ from src.contexts.shared.domain.logger.Logger import Logger
 
 
 class NativeConsoleLogger(BaseObject, Logger):
-
     _FORMAT = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
 
     def __init__(self):

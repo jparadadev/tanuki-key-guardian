@@ -8,7 +8,6 @@ from src.contexts.shared.domain.criteria.Criteria import Criteria
 
 
 class FindCryptoKeysByCriteriaQueryHandler(QueryHandler):
-
     _subscription: str = FindCryptoKeysByCriteriaQuery.QUERY_TYPE
 
     def __init__(self, finder: CryptoKeysByCriteriaFinder):

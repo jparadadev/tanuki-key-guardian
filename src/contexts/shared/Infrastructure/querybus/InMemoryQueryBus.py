@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 from src.contexts.shared.domain.BaseObject import BaseObject
 from src.contexts.shared.domain.Query import Query

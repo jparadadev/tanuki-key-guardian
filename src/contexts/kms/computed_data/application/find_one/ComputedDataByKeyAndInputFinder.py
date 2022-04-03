@@ -1,9 +1,9 @@
-from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
-from src.contexts.kms.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 from src.contexts.kms.computed_data.application.find_one.KmsComputedDataResponse import KmsComputedDataResponse
 from src.contexts.kms.computed_data.domain.entities.ComputedDataInput import ComputedDataInput
 from src.contexts.kms.computed_data.domain.entities.ComputedDataType import ComputedDataType
 from src.contexts.kms.computed_data.domain.repositories.ComputedDataRepository import ComputedDataRepository
+from src.contexts.kms.cryptokeys.domain.entities.CryptoKeyId import CryptoKeyId
+from src.contexts.kms.cryptokeys.domain.repositories.CryptoKeyRepository import CryptoKeyRepository
 
 
 class ComputedDataByKeyAndInputFinder:
@@ -21,4 +21,3 @@ class ComputedDataByKeyAndInputFinder:
         crypto_key = await self._cryptokey_repository.find_by_id(key_id)
         res = await self._computed_data_repository.find_one_by_crypto_key_and_input(crypto_key, input, cd_type)
         return KmsComputedDataResponse(res)
-

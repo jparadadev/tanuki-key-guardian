@@ -4,7 +4,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class QueryNotRegisteredError(DomainError):
-
     ERROR_ID = 'dfecfc84-d4a3-4e5e-be5d-c6e5cf9824c1'
 
     def __init__(self, msg: str = None):

@@ -1,6 +1,5 @@
 from typing import List, Any
 
-from src.contexts.kms.clients.domain.entities.Client import Client
 from src.contexts.kms.cryptokeys.domain.entities.CryptoKey import CryptoKey
 from src.contexts.shared.domain.Metadata import Metadata
 from src.contexts.shared.domain.Response import Response

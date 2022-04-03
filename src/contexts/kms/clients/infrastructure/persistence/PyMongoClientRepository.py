@@ -3,8 +3,8 @@ from typing import List, NoReturn, Tuple, Optional
 from pymongo import MongoClient, ASCENDING
 from pymongo.errors import DuplicateKeyError
 
-from src.contexts.kms.clients.domain.entities.Client import Client
 from src.contexts.kms.clients.domain.create_one.ClientAlreadyExistsError import ClientAlreadyExistsError
+from src.contexts.kms.clients.domain.entities.Client import Client
 from src.contexts.kms.clients.domain.entities.ClientId import ClientId
 from src.contexts.kms.clients.domain.find_one.ClientNotFoundError import ClientNotFoundError
 from src.contexts.kms.clients.domain.repositories.ClientRepository import ClientRepository
@@ -14,7 +14,6 @@ from src.contexts.shared.domain.criteria.Criteria import Criteria
 
 
 class PyMongoClientRepository(PyMongoRepository, ClientRepository):
-
     _COLLECTION_NAME = 'clients'
     _DATABASE_NAME = 'tanuki-key-guardian'
 

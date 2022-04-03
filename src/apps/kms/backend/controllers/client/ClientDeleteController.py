@@ -1,11 +1,9 @@
-from typing import Dict, Any
+from http import HTTPStatus
 
 from starlette.requests import Request
 from starlette.responses import JSONResponse
-from http import HTTPStatus
 
 from src.apps.kms.backend.controllers.KmsController import KmsController
-from src.contexts.kms.clients.application.create_one.CreateClientCommand import CreateClientCommand
 from src.contexts.kms.clients.application.delete_one.DeleteClientCommand import DeleteClientCommand
 from src.contexts.kms.clients.infrastructure.ClientsHttpResponseErrorHandler import JsonResponseErrorHandler
 from src.contexts.shared.domain.CommandBus import CommandBus

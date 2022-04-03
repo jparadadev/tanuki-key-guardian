@@ -14,7 +14,6 @@ from src.contexts.shared.domain.criteria.Criteria import Criteria
 
 
 class PyMongoCryptoKeyRepository(PyMongoRepository, CryptoKeyRepository):
-
     _COLLECTION_NAME = 'cryptokey'
     _DATABASE_NAME = 'tanuki-key-guardian'
 

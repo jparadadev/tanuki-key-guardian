@@ -6,7 +6,6 @@ from src.contexts.shared.domain.valueobj.AggregateRoot import AggregateRoot
 
 
 class CryptoKeyCreatedDomainEvent(DomainEvent):
-
     EVENT_TYPE = 'cryptokey.created'
 
     def __init__(

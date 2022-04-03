@@ -3,7 +3,6 @@ from src.contexts.shared.domain.Command import Command
 
 
 class CreateCryptoKeyCommand(BaseObject, Command):
-
     COMMAND_TYPE: str = 'kms.cryptokey.create-one'
 
     def __init__(self, cryptokey_id: str, client_id: str, cryptokey_type: str, payload: str, parameters: str,

@@ -4,7 +4,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class CryptoKeyNotFoundError(DomainError):
-
     ERROR_ID = '65f403a5-a6f2-412b-bbcd-356142927888'
 
     def __init__(self, msg: str = None):

@@ -5,7 +5,6 @@ from src.contexts.shared.domain.valueobj.ValueObject import ValueObject
 
 
 class CryptoKeyTypes(Enum):
-
     RSA = 'rsa'
     DIFFIE_HELLMAN = 'diffie-hellman'
     DIFFIE_HELLMAN_ELLIPTIC_CURVE = 'diffie-hellman-elliptic-curve'
@@ -32,4 +31,3 @@ class CryptoKeyType(ValueObject):
         if not CryptoKeyTypes.has_value(value):
             raise CryptoKeyInvalidValueError(f'Invalid value for <{value}>. '
                                              f'Should be one of <{CryptoKeyTypes.get_values()}>.')
-

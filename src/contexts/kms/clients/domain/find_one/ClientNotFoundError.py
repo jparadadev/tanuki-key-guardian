@@ -4,7 +4,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class ClientNotFoundError(DomainError):
-
     ERROR_ID = 'a312db5c-f566-4632-8b03-c1c16725c121'
 
     def __init__(self, msg: str = None):

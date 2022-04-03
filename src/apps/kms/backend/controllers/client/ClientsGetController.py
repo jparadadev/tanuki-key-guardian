@@ -1,15 +1,15 @@
+from http import HTTPStatus
+
 from fastapi.encoders import jsonable_encoder
 from starlette.requests import Request
 from starlette.responses import JSONResponse
-from http import HTTPStatus
 
 from src.apps.kms.backend.controllers.KmsController import KmsController
-
 from src.contexts.kms.clients.application.findall.FindClientsByCriteriaQuery import FindClientsByCriteriaQuery
 from src.contexts.shared.Infrastructure.parsers.parse_dict_format_to_criteria import parse_dict_to_criteria
-from src.contexts.shared.domain.Response import Response
 from src.contexts.shared.domain.Query import Query
 from src.contexts.shared.domain.QueryBus import QueryBus
+from src.contexts.shared.domain.Response import Response
 
 
 class ClientsGetController(KmsController):

@@ -4,7 +4,6 @@ from src.contexts.shared.domain.valueobj.ValueObject import ValueObject
 
 
 class ComputedDataTypes(Enum):
-
     ENCRYPT = 'encrypt'
     DECRYPT = 'decrypt'
     KEY_EXCHANGE = 'key-exchange'

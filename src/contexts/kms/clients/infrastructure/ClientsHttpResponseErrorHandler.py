@@ -10,7 +10,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class JsonResponseErrorHandler:
-
     _ERROR_OPTIONS_MAPPING: Dict[str, Dict[str, Any]] = {
         ClientAlreadyExistsError.ERROR_ID: {
             'is-private': False,

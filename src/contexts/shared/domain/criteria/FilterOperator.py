@@ -8,7 +8,6 @@ class FilterOperatorValues(Enum):
 
 
 class FilterOperator:
-
     _allowed_values = [e.value for e in FilterOperatorValues]
 
     def __init__(self, value: str):

@@ -4,7 +4,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class ClientInvalidValueError(DomainError):
-
     ERROR_ID = 'dae09312-2f93-41a0-8798-a5373407e0df'
 
     def __init__(self, msg: str = None):

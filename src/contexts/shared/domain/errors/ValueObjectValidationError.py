@@ -4,7 +4,6 @@ from src.contexts.shared.domain.errors.DomainError import DomainError
 
 
 class ValueObjectValidationError(DomainError):
-
     ERROR_ID = '2266749d-def0-4614-bde7-66e8fcc3b46f'
 
     def __init__(self, msg: str = None):

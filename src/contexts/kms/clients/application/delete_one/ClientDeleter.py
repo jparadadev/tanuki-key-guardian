@@ -1,6 +1,4 @@
-from src.contexts.kms.clients.domain.entities.Client import Client
 from src.contexts.kms.clients.domain.entities.ClientId import ClientId
-from src.contexts.kms.clients.domain.entities.ClientName import ClientName
 from src.contexts.kms.clients.domain.repositories.ClientRepository import ClientRepository
 from src.contexts.shared.domain.EventBus import EventBus
 

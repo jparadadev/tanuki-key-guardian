@@ -9,7 +9,6 @@ class OrderDirectionValues(Enum):
 
 
 class OrderDirection:
-
     _allowed_values = [e.value for e in OrderDirectionValues]
 
     def __init__(self, order_dir: str):

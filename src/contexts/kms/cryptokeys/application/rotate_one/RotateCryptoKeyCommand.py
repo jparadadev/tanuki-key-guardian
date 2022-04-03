@@ -3,7 +3,6 @@ from src.contexts.shared.domain.Command import Command
 
 
 class RotateCryptoKeyCommand(BaseObject, Command):
-
     COMMAND_TYPE: str = 'kms.cryptokey.rotate'
 
     def __init__(self, cryptokey_id: str):

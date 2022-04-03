@@ -12,4 +12,3 @@ class CryptoKeysByCriteriaFinder:
     async def run(self, criteria: Criteria) -> BackofficeCryptoKeysResponse:
         cryptokeys, criteria_metadata = await self._cryptokey_repository.find_by_criteria(criteria)
         return BackofficeCryptoKeysResponse(cryptokeys, criteria_metadata)
-
