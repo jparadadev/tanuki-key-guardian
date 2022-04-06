@@ -19,7 +19,6 @@ class CryptoKeyRotator:
 
         def uid(seed):
             random.seed(seed)
-
             return ''.join([chars[int(random.random() * length)] for _ in range(len(crypto_key.payload.value()))])
 
         # TODO: rotation

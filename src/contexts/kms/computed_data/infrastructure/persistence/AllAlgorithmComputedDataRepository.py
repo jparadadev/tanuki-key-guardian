@@ -25,7 +25,7 @@ class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
                                                cd_type: ComputedDataType) -> ComputedData:
         output = input.value()
         meta = {}
-        if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN.value:
+        if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN_ELLIPTIC_CURVE.value:
             output, meta = await self.ecdh_get_shared_key_platform(key.payload.value())
 
         if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN_HMAC.value:

@@ -6,7 +6,6 @@ from src.contexts.shared.domain.valueobj.ValueObject import ValueObject
 
 class CryptoKeyTypes(Enum):
     RSA = 'rsa'
-    DIFFIE_HELLMAN = 'diffie-hellman'
     DIFFIE_HELLMAN_ELLIPTIC_CURVE = 'diffie-hellman-elliptic-curve'
     DIFFIE_HELLMAN_HMAC = 'diffie-hellman-hmac'
     DES = 'des'
