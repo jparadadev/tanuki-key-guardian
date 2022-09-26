@@ -4,7 +4,7 @@ cffi==1.15.0
 click==8.0.4
 cryptography==36.0.2
 deepcomparer==0.0.9
-deepfinder==1.0.0
+deepfinder==1.2.0
 dependency-injector==4.38.0
 fastapi==0.75.0
 h11==0.13.0
