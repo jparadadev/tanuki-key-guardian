@@ -21,8 +21,12 @@ from src.contexts.shared.domain.BaseObject import BaseObject
 
 class AllAlgorithmComputedDataRepository(BaseObject, ComputedDataRepository):
 
-    async def find_one_by_crypto_key_and_input(self, key: CryptoKey, input: ComputedDataInput,
-                                               cd_type: ComputedDataType) -> ComputedData:
+    async def find_one_by_crypto_key_and_input(
+            self,
+            key: CryptoKey,
+            input: ComputedDataInput,
+            cd_type: ComputedDataType
+    ) -> ComputedData:
         output = input.value()
         meta = {}
         if key.type.value() == CryptoKeyTypes.DIFFIE_HELLMAN_ELLIPTIC_CURVE.value:

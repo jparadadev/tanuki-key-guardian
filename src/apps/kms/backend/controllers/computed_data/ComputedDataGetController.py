@@ -23,9 +23,13 @@ class ComputedDataGetController(KmsController):
 
     async def run(self, req: Request) -> JSONResponse:
         headers = dict(req.headers)
+        meta = {
+            'iv': headers.get('x-iv'),
+        }
         query: ComputedDataByKeyAndInputQuery = ComputedDataByKeyAndInputQuery(headers.get('x-key-id'),
                                                                                headers.get('x-input'),
-                                                                               headers.get('x-type'))
+                                                                               headers.get('x-type'),
+                                                                               meta)
         try:
             content = await self._query_bus.ask(query)
         except DomainError as err:
