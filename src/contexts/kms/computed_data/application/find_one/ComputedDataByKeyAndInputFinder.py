@@ -25,5 +25,5 @@ class ComputedDataByKeyAndInputFinder:
             meta: ComputedDataMeta,
     ) -> KmsComputedDataResponse:
         crypto_key = await self._cryptokey_repository.find_by_id(key_id)
-        res = await self._computed_data_repository.find_one_by_crypto_key_and_input(crypto_key, input, cd_type)
+        res = await self._computed_data_repository.find_one_by_crypto_key_and_input(crypto_key, input, cd_type, meta)
         return KmsComputedDataResponse(res)

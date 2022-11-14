@@ -16,7 +16,7 @@ def register(
 ):
     @router.get('/computed', tags=["Computed Data"])
     async def run_wrapper(req: Request, input=Header(None, alias='X-Input'), key_id=Header(None, alias='X-Key-Id'),
-                          type=Header(None, alias='X-Type')) -> JSONResponse:
+                          type=Header(None, alias='X-Type'), iv=Header(None, alias='X-Iv')) -> JSONResponse:
         return await computed_data_get_controller.run(req)
 
 
