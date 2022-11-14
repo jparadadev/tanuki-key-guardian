@@ -20,10 +20,10 @@ class ComputedDataByKeyAndInputFinder:
     async def run(
             self,
             key_id: CryptoKeyId,
-            input: ComputedDataInput,
+            cd_input: ComputedDataInput,
             cd_type: ComputedDataType,
             meta: ComputedDataMeta,
     ) -> KmsComputedDataResponse:
         crypto_key = await self._cryptokey_repository.find_by_id(key_id)
-        res = await self._computed_data_repository.find_one_by_crypto_key_and_input(crypto_key, input, cd_type, meta)
+        res = await self._computed_data_repository.find_one_by_crypto_key_and_input(crypto_key, cd_input, cd_type, meta)
         return KmsComputedDataResponse(res)
