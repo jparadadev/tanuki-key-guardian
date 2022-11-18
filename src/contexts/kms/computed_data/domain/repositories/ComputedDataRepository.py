@@ -8,10 +8,6 @@ from src.contexts.shared.domain.Interface import Interface
 
 class ComputedDataRepository(Interface):
 
-    _function_mapping: dict = {
-
-    }
-
     async def find_one_by_crypto_key_and_input(
             self,
             key: CryptoKey,
