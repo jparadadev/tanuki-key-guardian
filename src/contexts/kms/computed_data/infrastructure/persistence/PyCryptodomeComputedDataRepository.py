@@ -31,6 +31,7 @@ async def encrypt_aes(key: CryptoKey, input_data: ComputedDataInput, meta: Compu
 
     cipher = AES.new(encoded_key, AES.MODE_EAX, encoded_raw_iv)
     nonce = cipher.nonce
+    meta.value()['nonce'] = nonce.hex()
 
     raw_output, tag = cipher.encrypt_and_digest(encoded_raw_input)
     encoded_output = raw_output.hex()
@@ -42,8 +43,23 @@ async def encrypt_aes(key: CryptoKey, input_data: ComputedDataInput, meta: Compu
 
 
 async def decrypt_aes(key: CryptoKey, input_data: ComputedDataInput, meta: ComputedDataMeta) -> ComputedData:
-    output = ComputedDataOutput(input_data.value())
     data_type = ComputedDataType(ComputedDataTypes.DECRYPT.value)
+
+    raw_input = input_data.value()
+    raw_iv: str = meta.value().get('iv')
+    raw_nonce = meta.value().get('nonce')
+
+    encoded_key = key.payload.value().encode()
+
+    encoded_nonce = bytes.fromhex(raw_nonce)
+    encoded_input = bytes.fromhex(raw_input)
+
+    cipher = AES.new(encoded_key, AES.MODE_EAX, nonce=encoded_nonce)
+
+    encoded_output = cipher.decrypt(encoded_input)
+    plain_text = encoded_output.decode('utf-8')
+
+    output = ComputedDataOutput(plain_text)
     data = ComputedData(input_data, output, key.id, data_type, meta)
     return data
 
