@@ -25,6 +25,7 @@ async def encrypt_aes(key: CryptoKey, input_data: ComputedDataInput, meta: Compu
         encoded_raw_iv = raw_iv.encode(encode)
     else:
         encoded_raw_iv = os.urandom(16)
+        meta.value()['iv'] = encoded_raw_iv.hex()
 
     encoded_key = key.payload.value().encode()
 
