@@ -22,11 +22,8 @@ from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInp
     ComputedDataByKeyAndInputFinder
 from src.contexts.kms.computed_data.application.find_one.ComputedDataByKeyAndInputQueryHandler import \
     ComputedDataByKeyAndInputQueryHandler
-from src.contexts.kms.computed_data.domain.repositories.ComputedDataRepository import ComputedDataRepository
 from src.contexts.kms.computed_data.infrastructure.persistence.PyCryptodomeComputedDataRepository import \
     PyCryptodomeComputedDataRepository
-from src.contexts.kms.computed_data.infrastructure.persistence.UselessComputedDataRepository import \
-    UselessComputedDataRepository
 from src.contexts.kms.cryptokeys.application.create_one.CreateCryptoKeyCommandHandler import \
     CreateCryptoKeyCommandHandler
 from src.contexts.kms.cryptokeys.application.create_one.CryptoKeyCreator import CryptoKeyCreator
