@@ -8,11 +8,11 @@ class EnvVar(Enum):
     # ----------------------- KMS ---------------------------
     # -------------------------------------------------------
 
-    KMS_SERVER_HOST = 'kms.server.host'
-    KMS_SERVER_PORT = 'kms.server.port'
+    KMS_SERVER_HOST = 'kms_server_host'
+    KMS_SERVER_PORT = 'kms_server_port'
 
-    KMS_CLIENT_MONGO_HOST = 'kms.client.mongo.host'
-    KMS_CLIENT_MONGO_PORT = 'kms.client.mongo.port'
+    KMS_CLIENT_MONGO_HOST = 'kms_client_mongo_host'
+    KMS_CLIENT_MONGO_PORT = 'kms_client_mongo_port'
 
     # -------------------------------------------------------
     # ---------------------- SHARED -------------------------
