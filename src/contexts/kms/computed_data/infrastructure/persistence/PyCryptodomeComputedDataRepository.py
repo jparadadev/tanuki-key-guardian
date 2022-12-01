@@ -1,3 +1,5 @@
+import os
+
 from Crypto.Cipher import AES
 
 from src.contexts.kms.computed_data.domain.entities.ComputedData import ComputedData
@@ -18,23 +20,46 @@ async def encrypt_aes(key: CryptoKey, input_data: ComputedDataInput, meta: Compu
     raw_iv: str = meta.value().get('iv')
 
     encoded_raw_input = raw_input.encode(encode)
-    encoded_raw_iv = raw_iv.encode(encode)
 
-    cipher = AES.new(key.payload.value(), AES.MODE_CBC, encoded_raw_iv)
+    if raw_iv is not None:
+        encoded_raw_iv = raw_iv.encode(encode)
+    else:
+        encoded_raw_iv = os.urandom(16)
+        meta.value()['iv'] = encoded_raw_iv.hex()
+
+    encoded_key = key.payload.value().encode()
+
+    cipher = AES.new(encoded_key, AES.MODE_EAX, encoded_raw_iv)
     nonce = cipher.nonce
+    meta.value()['nonce'] = nonce.hex()
 
     raw_output, tag = cipher.encrypt_and_digest(encoded_raw_input)
     encoded_output = raw_output.hex()
 
     output = ComputedDataOutput(encoded_output)
-    data_type = ComputedDataType(ComputedDataTypes.ENCRYPT.value())
+    data_type = ComputedDataType(ComputedDataTypes.ENCRYPT.value)
     data = ComputedData(input_data, output, key.id, data_type, meta)
     return data
 
 
 async def decrypt_aes(key: CryptoKey, input_data: ComputedDataInput, meta: ComputedDataMeta) -> ComputedData:
-    output = ComputedDataOutput(input_data.value())
-    data_type = ComputedDataType(ComputedDataTypes.DECRYPT.value())
+    data_type = ComputedDataType(ComputedDataTypes.DECRYPT.value)
+
+    raw_input = input_data.value()
+    raw_iv: str = meta.value().get('iv')
+    raw_nonce = meta.value().get('nonce')
+
+    encoded_key = key.payload.value().encode()
+
+    encoded_nonce = bytes.fromhex(raw_nonce)
+    encoded_input = bytes.fromhex(raw_input)
+
+    cipher = AES.new(encoded_key, AES.MODE_EAX, nonce=encoded_nonce)
+
+    encoded_output = cipher.decrypt(encoded_input)
+    plain_text = encoded_output.decode('utf-8')
+
+    output = ComputedDataOutput(plain_text)
     data = ComputedData(input_data, output, key.id, data_type, meta)
     return data
 
@@ -57,7 +82,7 @@ class PyCryptodomeComputedDataRepository(BaseObject, ComputedDataRepository):
         if key.type.value() not in PyCryptodomeComputedDataRepository._FMAPPING:
             raise Exception('Algorithm not found.')
 
-        if key.type.value() not in PyCryptodomeComputedDataRepository._FMAPPING[key.type.value()]:
+        if operation_type.value() not in PyCryptodomeComputedDataRepository._FMAPPING[key.type.value()]:
             raise Exception('Operation type not found.')
 
         crypt_func = PyCryptodomeComputedDataRepository._FMAPPING[key.type.value()][operation_type.value()]

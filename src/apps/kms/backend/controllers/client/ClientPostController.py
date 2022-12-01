@@ -28,4 +28,4 @@ class ClientPostController(KmsController):
         except DomainError as err:
             return self._error_handler.resolve(err)
 
-        return JSONResponse(status_code=HTTPStatus.CREATED)
+        return JSONResponse(status_code=HTTPStatus.CREATED, content=None)

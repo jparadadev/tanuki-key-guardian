@@ -25,6 +25,7 @@ class ComputedDataGetController(KmsController):
         headers = dict(req.headers)
         meta = {
             'iv': headers.get('x-iv'),
+            'nonce': headers.get('x-nonce'),
         }
         query: ComputedDataByKeyAndInputQuery = ComputedDataByKeyAndInputQuery(headers.get('x-key-id'),
                                                                                headers.get('x-input'),

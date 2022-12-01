@@ -12,4 +12,4 @@ class StatusGetController(KmsController):
         pass
 
     async def run(self, req: Request) -> JSONResponse:
-        return JSONResponse(status_code=HTTPStatus.OK)
+        return JSONResponse(status_code=HTTPStatus.OK, content=None)
